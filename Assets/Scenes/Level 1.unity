@@ -488,7 +488,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!120 &1357106954
 LineRenderer:
   serializedVersion: 2
@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c94d4d06985c3cd4b96b462611394429, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  throwPower: 1
+  throwPower: 0.2
   RB: {fileID: 1357106952}
   minPower: {x: -0.05, y: -0.05}
   maxPower: {x: 0.005, y: 0.005}
@@ -656,6 +656,8 @@ MonoBehaviour:
   startPoint: {x: 0, y: 0, z: 0}
   endPoint: {x: 0, y: 0, z: 0}
   throwToggle: 0
+  minVector: {x: -10, y: -10}
+  maxVector: {x: 10, y: 10}
 --- !u!114 &1357106957
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player_Movement : MonoBehaviour
 {
+    // Bounce Code from: https://youtu.be/RoZG5RARGF0?si=YWrOxU8IgPAI_03O //
+    
     private Rigidbody2D RB;
     public Vector3 lastVelocity;
 

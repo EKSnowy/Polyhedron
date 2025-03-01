@@ -19,6 +19,9 @@ public class Throw_Script : MonoBehaviour
    public bool throwToggle;
 
    Trajectory_Script TS;
+   public Vector2 minVector;
+   public Vector2 maxVector;
+   public Vector2 currentPos;
    
    private void Start()
    {
@@ -30,6 +33,7 @@ public class Throw_Script : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            //Slows down time when choosing direction//
             Time.timeScale =.2f;
             startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             startPoint.z = 15;
@@ -41,27 +45,57 @@ public class Throw_Script : MonoBehaviour
             Vector3 currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             currentPoint.z = 15;
             TS.RenderLine(startPoint,currentPoint);
+            currentPos = transform.position;
         }
 
         if (Input.GetMouseButtonUp(0))
         {
+            //Resumes time and uses direction to apply force//
             Time.timeScale = 1f;
+            RB.velocity = Vector2.zero;
             endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             endPoint.z = 15;
-
-            force = new Vector2(Mathf.Clamp(startPoint.x - endPoint.x, minPower.x, maxPower.x), 
-                Mathf.Clamp(startPoint.y - endPoint.y, minPower.y, maxPower.y));
+            
             TS.Render(false);
-            throwToggle = true;
+            
+            calculateForce();
+        }
+        
+        //////Checks if the force has hit the cap speed///////
+        
+        //If velocity is lower than min X
+        if (RB.velocity.x <= minVector.x)
+        {
+            RB.velocity = new Vector2(minVector.x,RB.velocity.y);
+        }
+        //If velocity is lower than min Y
+        else if (RB.velocity.y <= minVector.y)
+        {
+            RB.velocity = new Vector2(RB.velocity.x,minVector.y);
+        }
+        //If velocity is higher than max X
+        else if (RB.velocity.x >= maxVector.x)
+        {
+            RB.velocity = new Vector2(maxVector.x,RB.velocity.y);
+        }
+        //If velocity is higher than max Y
+        else if (RB.velocity.y >= maxVector.y)
+        {
+            RB.velocity = new Vector2(RB.velocity.x,maxVector.y);
         }
     }
-
-   private void FixedUpdate()
+   
+   public void calculateForce()
    {
-       if (throwToggle)
-       {
-           RB.AddForce(force * throwPower, ForceMode2D.Force);
-           throwToggle = false;
-       }
+       Vector2 distance = (startPoint - endPoint);
+
+       force = distance * throwPower;
+       
+       /*force = new Vector2(Mathf.Clamp(distance.x, minPower.x, maxPower.x), 
+           Mathf.Clamp(distance.y, minPower.y, maxPower.y));*/
+        
+       RB.AddForce(force * throwPower, ForceMode2D.Force);
+       transform.position = currentPos;
    }
+   
 }
