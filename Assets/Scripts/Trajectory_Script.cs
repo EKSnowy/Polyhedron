@@ -27,4 +27,9 @@ public class Trajectory_Script : MonoBehaviour
     {
         LR.enabled = state;
     }
+
+    public void changeColor(Gradient gradient)
+    {
+        LR.colorGradient = gradient;
+    }
 }

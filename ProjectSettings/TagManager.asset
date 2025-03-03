@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Square Enemy
+  - Triangle Enemy
+  - Circle Enemy
   layers:
   - Default
   - TransparentFX
