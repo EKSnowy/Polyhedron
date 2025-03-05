@@ -112,17 +112,16 @@ public class Throw_Script : MonoBehaviour
        if (startPoint != endPoint)
        {
            RB.velocity = Vector2.zero;
-           
-           Vector2 distance = (startPoint - endPoint);
-           force = distance.normalized * throwPower;
-           
-           RB.AddForce(force * throwPower, ForceMode2D.Force);
-           transform.position = currentPos;
+
+           Vector2 distance = (startPoint - endPoint) / 25;
+
+           force = distance * throwPower;
+
+           RB.AddForce(force, ForceMode2D.Force);
        }
-       
-       /*force = new Vector2(Mathf.Clamp(distance.x, minPower.x, maxPower.x), 
-           Mathf.Clamp(distance.y, minPower.y, maxPower.y));*/
    }
+       
+       
    //For dashing
    public void calculateDash()
    {
