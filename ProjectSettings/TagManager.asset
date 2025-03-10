@@ -7,6 +7,8 @@ TagManager:
   - Square Enemy
   - Triangle Enemy
   - Circle Enemy
+  - Bullet
+  - Audio Manager
   layers:
   - Default
   - TransparentFX

@@ -11,9 +11,14 @@ public class Enemy_Script : MonoBehaviour
     public float speed;
 
     public ParticleSystem particle;
+    public Audio_Manager AM;
 
     private void Start()
     {
+        //Moves towards player
+        target = GameObject.FindWithTag("Player").transform;
+        AM = GameObject.FindWithTag("Audio Manager").GetComponent<Audio_Manager>();
+        
         if (gameObject.tag == "Triangle Enemy")
         {
             speed = Random.Range(2, 5);
@@ -22,12 +27,11 @@ public class Enemy_Script : MonoBehaviour
         {
             speed = Random.Range(1, 3);
         }
+        
     }
 
     void Update()
     {
-        //Moves towards player
-        target = GameObject.FindWithTag("Player").transform;
         //If square enemy, only follows if far away from the player
         if (gameObject.tag == "Square Enemy")
         {
@@ -54,6 +58,7 @@ public class Enemy_Script : MonoBehaviour
 
     public void Death()
     {
+        AM.playSound(1);
         Instantiate(particle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }

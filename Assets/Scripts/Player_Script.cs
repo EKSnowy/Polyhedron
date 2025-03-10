@@ -55,6 +55,12 @@ public class Player_Script : MonoBehaviour
             Enemy_Script circle = other.GetComponent<Enemy_Script>();
             circle.Death();
         }
+        
+        else if (other.gameObject.CompareTag("Bullet"))
+        {
+            health--;
+            healthChecker();
+        }
     }
 
     public void healthChecker()

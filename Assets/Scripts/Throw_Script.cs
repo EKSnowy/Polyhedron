@@ -25,11 +25,14 @@ public class Throw_Script : MonoBehaviour
    public TextMeshPro dashText;
 
    public Player_Script player;
+   public Audio_Manager AM;
    
    private void Start()
    {
        cam = Camera.main;
        TS = GetComponent<Trajectory_Script>();
+       
+       AM = GameObject.FindWithTag("Audio Manager").GetComponent<Audio_Manager>();
    }
 
    void Update()
@@ -90,6 +93,7 @@ public class Throw_Script : MonoBehaviour
             if (Input.GetMouseButtonUp(1))
             {
                 Time.timeScale = 1f;
+                AM.playSound(3);
                 endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
                 endPoint.z = 0;
 
@@ -129,10 +133,10 @@ public class Throw_Script : MonoBehaviour
        {
            RB.velocity = Vector2.zero;
            
-           Vector2 distance = (endPoint - startPoint);
-           force = distance.normalized * throwPower;
+           Vector2 distance = (endPoint - startPoint) / 25;
+           force = distance * throwPower;
            
-           RB.AddForce(force * throwPower, ForceMode2D.Force);
+           RB.AddForce(force, ForceMode2D.Force);
            
            dashCooldown = 3;
            player.setInvTimer(.5f);
