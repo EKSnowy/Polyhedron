@@ -9,6 +9,8 @@ TagManager:
   - Circle Enemy
   - Bullet
   - Audio Manager
+  - Wall
+  - Game Manager
   layers:
   - Default
   - TransparentFX

@@ -16,7 +16,6 @@ public class Throw_Script : MonoBehaviour
    public Vector3 endPoint;
 
    Trajectory_Script TS;
-   public Vector2 currentPos;
 
    public Gradient throwGradient;
    public Gradient dashGradient;
@@ -55,7 +54,6 @@ public class Throw_Script : MonoBehaviour
             Vector3 currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             currentPoint.z = 0;
             TS.RenderLine(startPoint,currentPoint);
-            currentPos = transform.position;
         }
 
         if (Input.GetMouseButtonUp(0))
