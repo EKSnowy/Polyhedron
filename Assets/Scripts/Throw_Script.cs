@@ -49,6 +49,7 @@ public class Throw_Script : MonoBehaviour
             TS.Render(true);
         }
 
+        //Renders line when mouse is pressed
         if (Input.GetMouseButton(0))
         {
             Vector3 currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);

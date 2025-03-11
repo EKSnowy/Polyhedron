@@ -13,19 +13,33 @@ public class Enemy_Script : MonoBehaviour
     public ParticleSystem particle;
     public Audio_Manager AM;
 
+    public float health;
+    public float maxHealth;
+    public HealthBar_Script HB;
+
     private void Start()
     {
-        //Moves towards player
         target = GameObject.FindWithTag("Player").transform;
         AM = GameObject.FindWithTag("Audio Manager").GetComponent<Audio_Manager>();
+        HB = GetComponentInChildren<HealthBar_Script>();
         
+        //Stats are selected based on the enemy type detected through tags
         if (gameObject.tag == "Triangle Enemy")
         {
             speed = Random.Range(2, 5);
+            health = 3;
+            maxHealth = 3;
         }
         else if (gameObject.tag == "Square Enemy")
         {
             speed = Random.Range(1, 3);
+            health = 5;
+            maxHealth = 5;
+        }
+        else if (gameObject.tag == "Circle Enemy")
+        {
+            health = 3;
+            maxHealth = 3;
         }
         
     }
@@ -48,7 +62,7 @@ public class Enemy_Script : MonoBehaviour
                 speed * Time.deltaTime);
         }
         
-        //Looks at player
+        //Rotates to look at player
         var offset = 90f;
         Vector2 direction = target.position - transform.position;
         direction.Normalize();
@@ -61,5 +75,16 @@ public class Enemy_Script : MonoBehaviour
         AM.playSound(1);
         Instantiate(particle, transform.position, Quaternion.identity);
         Destroy(gameObject);
+    }
+
+    public void takeDamage(float num)
+    {
+        health -= num;
+        HB.UpdateHealthBar(health,maxHealth);
+
+        if (health <= 0)
+        {
+            Death();
+        }
     }
 }

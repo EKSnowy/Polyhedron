@@ -15,7 +15,6 @@ public class Player_Script : MonoBehaviour
     {
         health = 5;
     }
-
     
     void Update()
     {
@@ -30,12 +29,13 @@ public class Player_Script : MonoBehaviour
         }
     }
 
+///////// Collisions ///////////////
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Triangle Enemy"))
         {
             Enemy_Script hazard = other.GetComponent<Enemy_Script>();
-            hazard.Death();
+            hazard.takeDamage(999);
 
             if (!isInv)
             {
@@ -47,13 +47,13 @@ public class Player_Script : MonoBehaviour
         else if (other.gameObject.CompareTag("Square Enemy"))
         {
             Enemy_Script shield = other.GetComponent<Enemy_Script>();
-            shield.Death();
+            shield.takeDamage(999);
         }
         
         else if (other.gameObject.CompareTag("Circle Enemy"))
         {
             Enemy_Script circle = other.GetComponent<Enemy_Script>();
-            circle.Death();
+            circle.takeDamage(999);
         }
         
         else if (other.gameObject.CompareTag("Bullet"))
@@ -73,6 +73,7 @@ public class Player_Script : MonoBehaviour
         }
     }
 
+    //Invincibility frames for dashing
     public void setInvTimer(float num)
     {
         invTimer = num;

@@ -6,6 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy_Spawner : MonoBehaviour
 {
+    //Allows for random enemies to spawn on top of the spawners created by the wave manager
     public float timer;
     public Audio_Manager AM;
     public Wave_Manager WM;
@@ -16,6 +17,7 @@ public class Enemy_Spawner : MonoBehaviour
     public ParticleSystem particle;
     private void Start()
     {
+        //Time to spawn is slightly randomized for each spawner
         timer = Random.Range(.3f, .8f);
         
         AM = GameObject.FindWithTag("Audio Manager").GetComponent<Audio_Manager>();
@@ -25,7 +27,8 @@ public class Enemy_Spawner : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
-
+        
+        //Selects one of the three enemy types to spawn in
         if (timer < 0)
         {
             int random = Random.Range(1, 4);
@@ -43,6 +46,7 @@ public class Enemy_Spawner : MonoBehaviour
                 WM.addList(Instantiate(Shield, new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
             }
             
+            //Upon spawn the spawner is destroyed and a particle and sound is placed
             Instantiate(particle, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
             AM.playSound(2);
             
