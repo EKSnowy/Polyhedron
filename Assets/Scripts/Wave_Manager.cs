@@ -9,7 +9,6 @@ public class Wave_Manager : MonoBehaviour
     public Audio_Manager AM;
     public List<GameObject> EnemyList;
     
-    public float emptyCount;
     public float spawnTime;
     public float enemyCount;
     public bool canSpawn;
@@ -32,6 +31,9 @@ public class Wave_Manager : MonoBehaviour
     public GameObject Option4;
     public GameObject Option5;
     public GameObject Option6;
+    public int randomSpell1;
+    public int randomSpell2;
+    public int randomSpell3;
     void Start()
     {
         AM = GameObject.FindWithTag("Audio Manager").GetComponent<Audio_Manager>();
@@ -53,7 +55,7 @@ public class Wave_Manager : MonoBehaviour
             checkList();
         }
         
-        else if (triggerShop)
+        if (triggerShop)
         {
             startShop();
         }
@@ -61,20 +63,19 @@ public class Wave_Manager : MonoBehaviour
     
     public void checkList()
     {
-        emptyCount = 0;
-        
         for(int i = 0; i < EnemyList.Count; i++)
         {
-            //Counts for each enemy missing in list
+            //Removes dead enemies from the list
             if (EnemyList[i] == null)
             {
-                emptyCount++;
+                EnemyList.Remove(EnemyList[i]);
             }
             
             ///if the entire enemy list is empty, triggers shop and moves to next wave
-            if (emptyCount == EnemyList.Count)
+            if (EnemyList.Count == 0)
             {
                 triggerShop = true;
+                canCheck = false;
             }
         }
     }
@@ -114,14 +115,126 @@ public class Wave_Manager : MonoBehaviour
 
     public void startShop()
     {
-        Time.timeScale = 0;
+        triggerShop = false;
         shopUI.SetActive(true);
 
-        int randomSpell1 = Random.Range(1, 7);
-        int randomSpell2 = Random.Range(1, 7);
-        int randomSpell3 = Random.Range(1, 7);
+        randomSpell1 = Random.Range(1, 7);
+        randomSpell2 = Random.Range(1, 7);
+        randomSpell3 = Random.Range(1, 7);
+
+        //Prevents options from repeating
+        while (randomSpell2 == randomSpell1 || randomSpell2 == randomSpell3)
+        {
+            randomSpell2 = Random.Range(1, 7);
+        }
+        while (randomSpell3 == randomSpell1 || randomSpell3 == randomSpell2)
+        {
+            randomSpell3 = Random.Range(1, 7);
+        }
         
+        //Prevents options from overlapping with one another
+        Option1.SetActive(false);
+        Option2.SetActive(false);
+        Option3.SetActive(false);
+        Option4.SetActive(false);
+        Option5.SetActive(false);
+        Option6.SetActive(false);
         
+        ///// Slot 1 //////
+        if (randomSpell1 == 1)
+        {
+            Option1.transform.position = spot1.position;
+            Option1.SetActive(true);
+        }
+        else if (randomSpell1 == 2)
+        {
+            Option2.transform.position = spot1.position;
+            Option2.SetActive(true);
+        }
+        else if (randomSpell1 == 3)
+        {
+            Option3.transform.position = spot1.position;
+            Option3.SetActive(true);
+        }
+        else if (randomSpell1 == 4)
+        {
+            Option4.transform.position = spot1.position;
+            Option4.SetActive(true);
+        }
+        else if (randomSpell1 == 5)
+        {
+            Option5.transform.position = spot1.position;
+            Option5.SetActive(true);
+        }
+        else if (randomSpell1 == 6)
+        {
+            Option6.transform.position = spot1.position;
+            Option6.SetActive(true);
+        }
+        
+        ///// Slot 2 //////
+        if (randomSpell2 == 1)
+        {
+            Option1.transform.position = spot2.position;
+            Option1.SetActive(true);
+        }
+        else if (randomSpell2 == 2)
+        {
+            Option2.transform.position = spot2.position;
+            Option2.SetActive(true);
+        }
+        else if (randomSpell2 == 3)
+        {
+            Option3.transform.position = spot2.position;
+            Option3.SetActive(true);
+        }
+        else if (randomSpell2 == 4)
+        {
+            Option4.transform.position = spot2.position;
+            Option4.SetActive(true);
+        }
+        else if (randomSpell2 == 5)
+        {
+            Option5.transform.position = spot2.position;
+            Option5.SetActive(true);
+        }
+        else if (randomSpell2 == 6)
+        {
+            Option6.transform.position = spot2.position;
+            Option6.SetActive(true);
+        }
+        
+        ///// Slot 3 //////
+        if (randomSpell3 == 1)
+        {
+            Option1.transform.position = spot3.position;
+            Option1.SetActive(true);
+        }
+        else if (randomSpell3 == 2)
+        {
+            Option2.transform.position = spot3.position;
+            Option2.SetActive(true);
+        }
+        else if (randomSpell3 == 3)
+        {
+            Option3.transform.position = spot3.position;
+            Option3.SetActive(true);
+        }
+        else if (randomSpell3 == 4)
+        {
+            Option4.transform.position = spot3.position;
+            Option4.SetActive(true);
+        }
+        else if (randomSpell3 == 5)
+        {
+            Option5.transform.position = spot3.position;
+            Option5.SetActive(true);
+        }
+        else if (randomSpell3 == 6)
+        {
+            Option6.transform.position = spot3.position;
+            Option6.SetActive(true);
+        }
     }
     
     
@@ -131,31 +244,47 @@ public class Wave_Manager : MonoBehaviour
     {
         Debug.Log("Hypnosis Chosen");
         
-        
+        shopUI.SetActive(false);
+        canSpawn = true;
     }
     
     public void spellFireball()
     {
         Debug.Log("Fireball Chosen");
+        
+        shopUI.SetActive(false);
+        canSpawn = true;
     }
     
     public void spellIceShards()
     {
         Debug.Log("Ice shards Chosen");
+        
+        shopUI.SetActive(false);
+        canSpawn = true;
     }
     
     public void spellLightningDome()
     {
         Debug.Log("lightning dome Chosen");
+        
+        shopUI.SetActive(false);
+        canSpawn = true;
     }
     
     public void spellBouncyBall()
     {
         Debug.Log("bouncy ball Chosen");
+        
+        shopUI.SetActive(false);
+        canSpawn = true;
     }
 
     public void spellShield()
     {
         Debug.Log("Shield Chosen");
+        
+        shopUI.SetActive(false);
+        canSpawn = true;
     }
 }

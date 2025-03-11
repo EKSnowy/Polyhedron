@@ -347,17 +347,20 @@ MonoBehaviour:
   waves: 0
   wavesText: {fileID: 1691408566}
   spawner: {fileID: 5046496261409128819, guid: 4735f518d885e81429c14d2117c855f7, type: 3}
-  shopUI: {fileID: 0}
+  shopUI: {fileID: 179256446}
   triggerShop: 0
-  spot1: {fileID: 0}
-  spot2: {fileID: 0}
-  spot3: {fileID: 0}
-  Option1: {fileID: 0}
-  Option2: {fileID: 0}
-  Option3: {fileID: 0}
-  Option4: {fileID: 0}
-  Option5: {fileID: 0}
-  Option6: {fileID: 0}
+  spot1: {fileID: 438213285}
+  spot2: {fileID: 1360443667}
+  spot3: {fileID: 907096408}
+  Option1: {fileID: 1646555358}
+  Option2: {fileID: 2025678232}
+  Option3: {fileID: 2011029716}
+  Option4: {fileID: 1922293164}
+  Option5: {fileID: 1993731124}
+  Option6: {fileID: 1895772736}
+  randomSpell1: 0
+  randomSpell2: 0
+  randomSpell3: 0
 --- !u!1 &179256446
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,7 +378,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &179256447
 RectTransform:
   m_ObjectHideFlags: 0
@@ -391,12 +394,12 @@ RectTransform:
   - {fileID: 438213285}
   - {fileID: 1360443667}
   - {fileID: 907096408}
-  - {fileID: 1646555359}
-  - {fileID: 2025678233}
-  - {fileID: 2011029717}
-  - {fileID: 1922293165}
-  - {fileID: 1993731125}
   - {fileID: 1895772737}
+  - {fileID: 1993731125}
+  - {fileID: 1922293165}
+  - {fileID: 2011029717}
+  - {fileID: 2025678233}
+  - {fileID: 1646555359}
   m_Father: {fileID: 647681184}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -499,7 +502,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spell 1
+  m_text: Hypnosis
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1047,7 +1050,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spell 3
+  m_text: Ice Shards
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2277,7 +2280,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spell 2
+  m_text: Fireball
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2391,7 +2394,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -52.9, y: -1.5}
+  m_AnchoredPosition: {x: 48.9, y: 106.4}
   m_SizeDelta: {x: -197.064, y: -96.328}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!114 &1646555360
@@ -2475,7 +2478,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1646555360}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 100557934}
+        m_TargetAssemblyTypeName: Wave_Manager, Assembly-CSharp
+        m_MethodName: spellHypnosis
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1691408565
 GameObject:
   m_ObjectHideFlags: 0
@@ -2704,7 +2719,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spell 5
+  m_text: Bouncy Ball
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2838,7 +2853,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spell 6
+  m_text: Shield
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3036,7 +3051,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 49.4, y: -1.5}
+  m_AnchoredPosition: {x: 49.4, y: 105.7}
   m_SizeDelta: {x: -197.064, y: -96.328}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!114 &1895772738
@@ -3082,7 +3097,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1895772739}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 100557934}
+        m_TargetAssemblyTypeName: Wave_Manager, Assembly-CSharp
+        m_MethodName: spellShield
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1895772739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3158,7 +3185,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 49.4, y: -1.5}
+  m_AnchoredPosition: {x: 49.4, y: 106.5}
   m_SizeDelta: {x: -197.064, y: -96.328}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!114 &1922293166
@@ -3204,7 +3231,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1922293167}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 100557934}
+        m_TargetAssemblyTypeName: Wave_Manager, Assembly-CSharp
+        m_MethodName: spellLightningDome
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1922293167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3596,7 +3635,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 49.4, y: -1.5}
+  m_AnchoredPosition: {x: 49.4, y: 107}
   m_SizeDelta: {x: -197.064, y: -96.328}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!114 &1993731126
@@ -3642,7 +3681,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1993731127}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 100557934}
+        m_TargetAssemblyTypeName: Wave_Manager, Assembly-CSharp
+        m_MethodName: spellBouncyBall
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1993731127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3718,7 +3769,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 49.4, y: -1.5}
+  m_AnchoredPosition: {x: 49.4, y: 107}
   m_SizeDelta: {x: -197.064, y: -96.328}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!114 &2011029718
@@ -3802,7 +3853,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2011029718}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 100557934}
+        m_TargetAssemblyTypeName: Wave_Manager, Assembly-CSharp
+        m_MethodName: spellIceShards
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2025678232
 GameObject:
   m_ObjectHideFlags: 0
@@ -3840,7 +3903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -2, y: -1.5}
+  m_AnchoredPosition: {x: 48.8, y: 106.7}
   m_SizeDelta: {x: -197.064, y: -96.328}
   m_Pivot: {x: 0.50000006, y: 0.5}
 --- !u!114 &2025678234
@@ -3924,7 +3987,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2025678234}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 100557934}
+        m_TargetAssemblyTypeName: Wave_Manager, Assembly-CSharp
+        m_MethodName: spellFireball
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2037527968
 GameObject:
   m_ObjectHideFlags: 0
@@ -4372,7 +4447,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Spell 4
+  m_text: Lightning Dome
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
