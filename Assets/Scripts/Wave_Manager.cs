@@ -34,6 +34,8 @@ public class Wave_Manager : MonoBehaviour
     public int randomSpell1;
     public int randomSpell2;
     public int randomSpell3;
+
+    public Spell_Script spellManager;
     void Start()
     {
         AM = GameObject.FindWithTag("Audio Manager").GetComponent<Audio_Manager>();
@@ -242,7 +244,7 @@ public class Wave_Manager : MonoBehaviour
     
     public void spellHypnosis()
     {
-        Debug.Log("Hypnosis Chosen");
+        spellManager.addHypnosisLevel();
         
         shopUI.SetActive(false);
         canSpawn = true;
@@ -250,7 +252,7 @@ public class Wave_Manager : MonoBehaviour
     
     public void spellFireball()
     {
-        Debug.Log("Fireball Chosen");
+        spellManager.addFireLevel();
         
         shopUI.SetActive(false);
         canSpawn = true;
@@ -258,7 +260,7 @@ public class Wave_Manager : MonoBehaviour
     
     public void spellIceShards()
     {
-        Debug.Log("Ice shards Chosen");
+        spellManager.addIceLevel();
         
         shopUI.SetActive(false);
         canSpawn = true;
@@ -266,7 +268,7 @@ public class Wave_Manager : MonoBehaviour
     
     public void spellLightningDome()
     {
-        Debug.Log("lightning dome Chosen");
+        spellManager.addLightningLevel();
         
         shopUI.SetActive(false);
         canSpawn = true;
@@ -274,7 +276,7 @@ public class Wave_Manager : MonoBehaviour
     
     public void spellBouncyBall()
     {
-        Debug.Log("bouncy ball Chosen");
+        spellManager.addBallLevel();
         
         shopUI.SetActive(false);
         canSpawn = true;
@@ -282,7 +284,7 @@ public class Wave_Manager : MonoBehaviour
 
     public void spellShield()
     {
-        Debug.Log("Shield Chosen");
+        spellManager.addShieldLevel();
         
         shopUI.SetActive(false);
         canSpawn = true;
