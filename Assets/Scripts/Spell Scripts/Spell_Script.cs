@@ -4,20 +4,67 @@ using UnityEngine;
 
 public class Spell_Script : MonoBehaviour
 {
+    //Spell levels
     public float fireLevel;
     public float iceLevel;
     public float lightningLevel;
     public float ballLevel;
     public float hypnosisLevel;
     public float shieldLevel;
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    //Spell timers
+    public float fireTimer;
+    public float iceTimer;
+    public float ballTimer;
+    public float hypnosisTimer;
+    public float shieldTimer;
+    //Spell booleans
+    public bool toggleFire;
+    public bool toggleIce;
+    public bool toggleLightning;
+    public bool toggleBall;
+    public bool toggleHypnosis;
+    public bool toggleShield;
+    //Spell damage
+    public float fireDamage;
+    public float iceDamage;
+    public float lightningDamage;
+    public float ballDamage;
+    public float hypnosisDamage;
+    public float shieldHealth;
+    //Spell Objects
+    public GameObject Fireball;
+    public GameObject Iceshards;
+    public GameObject LightningDome;
+    public GameObject BouncyBall;
+    public GameObject Hypnosis;
+    
+    public GameObject shield1;
+    public GameObject shield2;
+    public GameObject shield3;
+    public GameObject shield4;
+    //Spell Scripts
+    public Fireball_Script fireScript;
+    public Ice_Script iceScript;
+    public Lightning_Script lightningScript;
+    public Bouncyball_Script ballScript;
+    public Hypnosis_Script hypnosisScript;
+    public Shield_Script shieldScript1;
+    public Shield_Script shieldScript2;
+    public Shield_Script shieldScript3;
+    public Shield_Script shieldScript4;
+    
+    public Vector3 mousePos;
     void Update()
     {
+        //Fire Toggle//
+        if (toggleFire)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+            {
+                mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+                
+            }
+        }
         
     }
 ///////////// Fire Spell /////////////////
@@ -27,7 +74,8 @@ public class Spell_Script : MonoBehaviour
 
         if (fireLevel == 1)
         {
-            
+            toggleFire = true;
+            fireScript.setDamage(2);
         }
         
         else if (fireLevel == 2)
@@ -48,7 +96,8 @@ public class Spell_Script : MonoBehaviour
 
         if (iceLevel == 1)
         {
-            
+            toggleIce = true;
+            iceScript.setDamage(1);
         }
         
         else if (iceLevel == 2)
@@ -69,7 +118,8 @@ public class Spell_Script : MonoBehaviour
 
         if (lightningLevel == 1)
         {
-            
+            toggleLightning = true;
+            lightningScript.setDamage(1);
         }
         
         else if (lightningLevel == 2)
@@ -90,7 +140,8 @@ public class Spell_Script : MonoBehaviour
 
         if (ballLevel == 1)
         {
-            
+            toggleBall = true;
+            ballScript.setDamage(1);
         }
         
         else if (ballLevel == 2)
@@ -111,7 +162,7 @@ public class Spell_Script : MonoBehaviour
 
         if (hypnosisLevel == 1)
         {
-            
+            toggleHypnosis = true;
         }
         
         else if (hypnosisLevel == 2)
@@ -132,17 +183,26 @@ public class Spell_Script : MonoBehaviour
 
         if (shieldLevel == 1)
         {
-            
+            shield1.SetActive(true);
+            shieldScript1.setHealth(1);
         }
         
         else if (shieldLevel == 2)
         {
-            
+            shield2.SetActive(true);
+            shieldScript2.setHealth(1);
         }
         
         else if (shieldLevel == 3)
         {
-            
+            shield3.SetActive(true);
+            shieldScript3.setHealth(1);
+        }
+        
+        else if (shieldLevel == 4)
+        {
+            shield4.SetActive(true);
+            shieldScript4.setHealth(1);
         }
     }
 }
