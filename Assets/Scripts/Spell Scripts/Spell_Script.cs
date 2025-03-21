@@ -11,6 +11,8 @@ public class Spell_Script : MonoBehaviour
     public float ballLevel;
     public float hypnosisLevel;
     public float shieldLevel;
+
+    public float rerollLevel;
     //Spell timers
     public float fireTimer;
     public float iceTimer;
@@ -24,6 +26,15 @@ public class Spell_Script : MonoBehaviour
     public bool toggleBall;
     public bool toggleHypnosis;
     public bool toggleShield;
+
+    public bool maxFire;
+    public bool maxIce;
+    public bool maxLightning;
+    public bool maxBall;
+    public bool maxHypnosis;
+    public bool maxShield;
+
+    public bool maxSpell;
     //Spell damage
     public float fireDamage;
     public float iceDamage;
@@ -204,5 +215,56 @@ public class Spell_Script : MonoBehaviour
             shield4.SetActive(true);
             shieldScript4.setHealth(1);
         }
+        
+        else if (shieldLevel == 5)
+        {
+            shieldScript1.setHealth(2);
+            shieldScript2.setHealth(2);
+            shieldScript3.setHealth(2);
+            shieldScript4.setHealth(2);
+
+            maxShield = true;
+            maxSpell = true;
+            rerollLevel++;
+        }
+    }
+    
+    ///////// Max Spell Checker ///////////
+
+    public bool getFireMax()
+    {
+        return maxFire;
+    }
+    public bool getIceMax()
+    {
+        return maxIce;
+    }
+    public bool getLightningMax()
+    {
+        return maxLightning;
+    }
+    public bool getBallMax()
+    {
+        return maxBall;
+    }
+    public bool getHypnosisMax()
+    {
+        return maxHypnosis;
+    }
+    public bool getShieldMax()
+    {
+        return maxShield;
+    }
+
+    //If any spells are maxed, this returns true
+    public bool getMaxSpell()
+    {
+        return maxSpell;
+    }
+
+    //For every spell maxed, adds one to reroll counter
+    public float getReroll()
+    {
+        return rerollLevel;
     }
 }

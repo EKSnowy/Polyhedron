@@ -6,6 +6,7 @@ using UnityEngine;
 public class Shield_Script : MonoBehaviour
 {
     public float health;
+    public float maxHealth;
     public float healthTimer;
     public bool resetTimer;
     public float speed;
@@ -34,7 +35,7 @@ public class Shield_Script : MonoBehaviour
             gameObject.GetComponent<BoxCollider2D>().enabled = true;
             gameObject.GetComponent<SpriteRenderer>().enabled = true;
             
-            health = 1;
+            health = maxHealth;
             resetTimer = false;
         }
     }
@@ -56,7 +57,8 @@ public class Shield_Script : MonoBehaviour
 
     public void setHealth(float num)
     {
-        health = num;
+        maxHealth = num;
+        health = maxHealth;
     }
 
     public void takeDamage(float num)

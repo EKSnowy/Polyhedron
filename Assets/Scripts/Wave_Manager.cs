@@ -20,6 +20,10 @@ public class Wave_Manager : MonoBehaviour
     
     public GameObject shopUI;
     public bool triggerShop;
+
+    public GameObject closeButton;
+    public GameObject rerollButton;
+    public float rerollCounter;
     //Spots for the spells
     public Transform spot1;
     public Transform spot2;
@@ -76,6 +80,8 @@ public class Wave_Manager : MonoBehaviour
             ///if the entire enemy list is empty, triggers shop and moves to next wave
             if (EnemyList.Count == 0)
             {
+                rerollCounter = spellManager.getReroll();
+                
                 triggerShop = true;
                 canCheck = false;
             }
@@ -119,6 +125,7 @@ public class Wave_Manager : MonoBehaviour
     {
         triggerShop = false;
         shopUI.SetActive(true);
+        closeButton.SetActive(false);
 
         randomSpell1 = Random.Range(1, 7);
         randomSpell2 = Random.Range(1, 7);
@@ -142,100 +149,191 @@ public class Wave_Manager : MonoBehaviour
         Option5.SetActive(false);
         Option6.SetActive(false);
         
+        /////// Rerolls ////////
+        
+        //If a spell is maxed out, gives option to reroll
+        if (spellManager.getMaxSpell())
+        {
+            rerollButton.SetActive(true);
+            
+            //If no more rerolls, disables button and activates close shop
+            if (rerollCounter <= 0)
+            {
+                rerollButton.SetActive(false);
+                closeButton.SetActive(true);
+            }
+        }
+        else
+        {
+            rerollButton.SetActive(false);
+        }
+        
         ///// Slot 1 //////
         if (randomSpell1 == 1)
         {
-            Option1.transform.position = spot1.position;
-            Option1.SetActive(true);
+            //Hypnosis
+            if (!spellManager.getHypnosisMax())
+            {
+                Option1.transform.position = spot1.position;
+                Option1.SetActive(true);
+            }
         }
         else if (randomSpell1 == 2)
         {
-            Option2.transform.position = spot1.position;
-            Option2.SetActive(true);
+            //Fireball
+            if (!spellManager.getFireMax())
+            {
+                Option2.transform.position = spot1.position;
+                Option2.SetActive(true);
+            }
         }
         else if (randomSpell1 == 3)
         {
-            Option3.transform.position = spot1.position;
-            Option3.SetActive(true);
+            //Ice Shards
+            if (!spellManager.getIceMax())
+            {
+                Option3.transform.position = spot1.position;
+                Option3.SetActive(true);
+            }
         }
         else if (randomSpell1 == 4)
         {
-            Option4.transform.position = spot1.position;
-            Option4.SetActive(true);
+            //Lightning
+            if (!spellManager.getLightningMax())
+            {
+                Option4.transform.position = spot1.position;
+                Option4.SetActive(true);
+            }
         }
         else if (randomSpell1 == 5)
         {
-            Option5.transform.position = spot1.position;
-            Option5.SetActive(true);
+            //Ball
+            if (!spellManager.getBallMax())
+            {
+                Option5.transform.position = spot1.position;
+                Option5.SetActive(true);
+            }
         }
         else if (randomSpell1 == 6)
         {
-            Option6.transform.position = spot1.position;
-            Option6.SetActive(true);
+            //Shield
+            if (!spellManager.getShieldMax())
+            {
+                Option6.transform.position = spot1.position;
+                Option6.SetActive(true);
+            }
         }
         
         ///// Slot 2 //////
         if (randomSpell2 == 1)
         {
-            Option1.transform.position = spot2.position;
-            Option1.SetActive(true);
+            //Hypnosis
+            if (!spellManager.getHypnosisMax())
+            {
+                Option1.transform.position = spot2.position;
+                Option1.SetActive(true);
+            }
         }
         else if (randomSpell2 == 2)
         {
-            Option2.transform.position = spot2.position;
-            Option2.SetActive(true);
+            //Fireball
+            if (!spellManager.getFireMax())
+            {
+                Option2.transform.position = spot2.position;
+                Option2.SetActive(true);
+            }
         }
         else if (randomSpell2 == 3)
         {
-            Option3.transform.position = spot2.position;
-            Option3.SetActive(true);
+            //Ice Shards
+            if (!spellManager.getIceMax())
+            {
+                Option3.transform.position = spot2.position;
+                Option3.SetActive(true);
+            }
         }
         else if (randomSpell2 == 4)
         {
-            Option4.transform.position = spot2.position;
-            Option4.SetActive(true);
+            //Lightning
+            if (!spellManager.getLightningMax())
+            {
+                Option4.transform.position = spot2.position;
+                Option4.SetActive(true);
+            }
         }
         else if (randomSpell2 == 5)
         {
-            Option5.transform.position = spot2.position;
-            Option5.SetActive(true);
+            //Ball
+            if (!spellManager.getBallMax())
+            {
+                Option5.transform.position = spot2.position;
+                Option5.SetActive(true);
+            }
         }
         else if (randomSpell2 == 6)
         {
-            Option6.transform.position = spot2.position;
-            Option6.SetActive(true);
+            //Shield
+            if (!spellManager.getShieldMax())
+            {
+                Option6.transform.position = spot2.position;
+                Option6.SetActive(true);
+            }
         }
         
         ///// Slot 3 //////
         if (randomSpell3 == 1)
         {
-            Option1.transform.position = spot3.position;
-            Option1.SetActive(true);
+            //Hypnosis
+            if (!spellManager.getHypnosisMax())
+            {
+                Option1.transform.position = spot3.position;
+                Option1.SetActive(true);
+            }
         }
         else if (randomSpell3 == 2)
         {
-            Option2.transform.position = spot3.position;
-            Option2.SetActive(true);
+            //Fireball
+            if (!spellManager.getFireMax())
+            {
+                Option2.transform.position = spot3.position;
+                Option2.SetActive(true);
+            }
         }
         else if (randomSpell3 == 3)
         {
-            Option3.transform.position = spot3.position;
-            Option3.SetActive(true);
+            //Ice Shards
+            if (!spellManager.getIceMax())
+            {
+                Option3.transform.position = spot3.position;
+                Option3.SetActive(true);
+            }
         }
         else if (randomSpell3 == 4)
         {
-            Option4.transform.position = spot3.position;
-            Option4.SetActive(true);
+            //Lightning
+            if (!spellManager.getLightningMax())
+            {
+                Option4.transform.position = spot3.position;
+                Option4.SetActive(true);
+            }
         }
         else if (randomSpell3 == 5)
         {
-            Option5.transform.position = spot3.position;
-            Option5.SetActive(true);
+            //Ball
+            if (!spellManager.getBallMax())
+            {
+                Option5.transform.position = spot3.position;
+                Option5.SetActive(true);
+            }
         }
         else if (randomSpell3 == 6)
         {
-            Option6.transform.position = spot3.position;
-            Option6.SetActive(true);
+            //Shield
+            if (!spellManager.getShieldMax())
+            {
+                Option6.transform.position = spot3.position;
+                Option6.SetActive(true);
+            }
         }
     }
     
@@ -286,6 +384,21 @@ public class Wave_Manager : MonoBehaviour
     {
         spellManager.addShieldLevel();
         
+        shopUI.SetActive(false);
+        canSpawn = true;
+    }
+
+    public void Reroll()
+    {
+        if (rerollCounter > 0)
+        {
+            rerollCounter--;
+            startShop();
+        }
+    }
+
+    public void closeShop()
+    {
         shopUI.SetActive(false);
         canSpawn = true;
     }
