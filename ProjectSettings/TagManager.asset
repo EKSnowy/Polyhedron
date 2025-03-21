@@ -11,6 +11,7 @@ TagManager:
   - Audio Manager
   - Wall
   - Game Manager
+  - Shield
   layers:
   - Default
   - TransparentFX

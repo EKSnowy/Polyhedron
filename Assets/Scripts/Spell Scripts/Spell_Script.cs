@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,6 +16,8 @@ public class Spell_Script : MonoBehaviour
     public float rerollLevel;
     //Spell timers
     public float fireTimer;
+    public float maxFireTimer;
+    
     public float iceTimer;
     public float ballTimer;
     public float hypnosisTimer;
@@ -64,19 +67,32 @@ public class Spell_Script : MonoBehaviour
     public Shield_Script shieldScript3;
     public Shield_Script shieldScript4;
     
-    public Vector3 mousePos;
+    public Transform player;
+
+    private void Start()
+    {
+        player = GameObject.FindWithTag("Player").transform;
+    }
+
     void Update()
     {
         //Fire Toggle//
         if (toggleFire)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+            if (fireTimer > 0)
             {
-                mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-                
+                fireTimer -= Time.deltaTime;
+            }
+            //If cooldown is up
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
+                {
+                    Instantiate(Fireball, player.position, Quaternion.identity);
+                    fireTimer = maxFireTimer;
+                }
             }
         }
-        
     }
 ///////////// Fire Spell /////////////////
     public void addFireLevel()
@@ -86,17 +102,28 @@ public class Spell_Script : MonoBehaviour
         if (fireLevel == 1)
         {
             toggleFire = true;
-            fireScript.setDamage(2);
+            fireScript.setDamage(3);
+            fireScript.setBurn(2,1);
+            maxFireTimer = 3;
         }
         
         else if (fireLevel == 2)
         {
-            
+            fireScript.setDamage(5);
+            fireScript.setBurn(3,2);
+            maxFireTimer = 2;
         }
         
         else if (fireLevel == 3)
         {
+            fireScript.setDamage(8);
+            fireScript.setBurn(5,2);
+            maxFireTimer = 1;
             
+            //Maxed level
+            maxShield = true;
+            maxSpell = true;
+            rerollLevel++;
         }
     }
     
@@ -223,6 +250,7 @@ public class Spell_Script : MonoBehaviour
             shieldScript3.setHealth(2);
             shieldScript4.setHealth(2);
 
+            //Maxed Level
             maxShield = true;
             maxSpell = true;
             rerollLevel++;

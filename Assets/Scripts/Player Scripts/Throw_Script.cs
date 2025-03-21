@@ -25,6 +25,7 @@ public class Throw_Script : MonoBehaviour
 
    public Player_Script player;
    public Audio_Manager AM;
+   public AudioSource Music;
    
    private void Start()
    {
@@ -42,6 +43,9 @@ public class Throw_Script : MonoBehaviour
         {
             //Slows down time when choosing direction//
             Time.timeScale =.2f;
+            Music.volume = .2f;
+            Music.pitch = .98f;
+            
             startPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             startPoint.z = 0;
             
@@ -61,6 +65,9 @@ public class Throw_Script : MonoBehaviour
         {
             //Resumes time and uses direction to apply force//
             Time.timeScale = 1f;
+            Music.volume = .35f;
+            Music.pitch = 1f;
+            
             endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
             endPoint.z = 0;
             
@@ -76,7 +83,10 @@ public class Throw_Script : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(1))
             {
+                //Slows down time when choosing direction//
                 Time.timeScale =.2f;
+                Music.volume = .2f;
+                Music.pitch = .98f;
             
                 TS.changeColor(dashGradient);
                 TS.Render(true);
@@ -91,7 +101,11 @@ public class Throw_Script : MonoBehaviour
             //Player teleports to end point as a dash, gains invincibility, and activates cooldown
             if (Input.GetMouseButtonUp(1))
             {
+                //Resumes time//
                 Time.timeScale = 1f;
+                Music.volume = .35f;
+                Music.pitch = 1f;
+                
                 AM.playSound(3);
                 endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
                 endPoint.z = 0;

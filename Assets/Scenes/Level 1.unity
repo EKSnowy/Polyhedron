@@ -518,6 +518,7 @@ MonoBehaviour:
   shieldLevel: 0
   rerollLevel: 0
   fireTimer: 0
+  maxFireTimer: 0
   iceTimer: 0
   ballTimer: 0
   hypnosisTimer: 0
@@ -541,7 +542,7 @@ MonoBehaviour:
   ballDamage: 0
   hypnosisDamage: 0
   shieldHealth: 0
-  Fireball: {fileID: 0}
+  Fireball: {fileID: 568059249390451081, guid: 1b631951b32c34d4cbcfc378e3cc27a9, type: 3}
   Iceshards: {fileID: 0}
   LightningDome: {fileID: 0}
   BouncyBall: {fileID: 0}
@@ -550,7 +551,7 @@ MonoBehaviour:
   shield2: {fileID: 697695792}
   shield3: {fileID: 1004151756}
   shield4: {fileID: 216564204}
-  fireScript: {fileID: 0}
+  fireScript: {fileID: 2983143043068048358, guid: 1b631951b32c34d4cbcfc378e3cc27a9, type: 3}
   iceScript: {fileID: 0}
   lightningScript: {fileID: 0}
   ballScript: {fileID: 0}
@@ -559,7 +560,7 @@ MonoBehaviour:
   shieldScript2: {fileID: 697695795}
   shieldScript3: {fileID: 1004151759}
   shieldScript4: {fileID: 216564207}
-  mousePos: {x: 0, y: 0, z: 0}
+  player: {fileID: 0}
 --- !u!1 &179256446
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,7 +1556,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 166bc5e2f9023b04381027dc7af59df5, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.4
+  m_Volume: 0.35
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -5621,6 +5622,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 519420031}
     - target: {fileID: 1315645541605393709, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
+      propertyPath: Music
+      value: 
+      objectReference: {fileID: 582488528}
+    - target: {fileID: 1315645541605393709, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
       propertyPath: dashText
       value: 
       objectReference: {fileID: 65816357}
@@ -5740,6 +5745,10 @@ PrefabInstance:
       propertyPath: m_Sources.Array.data[0].sourceTransform
       value: 
       objectReference: {fileID: 648118360}
+    - target: {fileID: 4685886815689826727, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
+      propertyPath: m_TagString
+      value: Shield
+      objectReference: {fileID: 0}
     - target: {fileID: 4690024224170183137, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.1

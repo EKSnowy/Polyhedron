@@ -173,6 +173,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  maxHealth: 0
+  healthTimer: 0
+  resetTimer: 0
   speed: 200
   target: {fileID: 0}
 --- !u!1818360608 &512795989598761700
@@ -206,7 +209,7 @@ GameObject:
   - component: {fileID: 4690024224170183137}
   m_Layer: 0
   m_Name: Shields
-  m_TagString: Untagged
+  m_TagString: Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -577,6 +580,7 @@ MonoBehaviour:
   dashText: {fileID: 0}
   player: {fileID: 1597512205767585543}
   AM: {fileID: 0}
+  Music: {fileID: 0}
 --- !u!114 &1483608844891868428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -794,6 +798,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  maxHealth: 0
+  healthTimer: 0
+  resetTimer: 0
   speed: 200
   target: {fileID: 0}
 --- !u!1818360608 &3976598142997588989
@@ -1160,6 +1167,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 1
+  maxHealth: 0
+  healthTimer: 0
+  resetTimer: 0
   speed: 200
   target: {fileID: 0}
 --- !u!1818360608 &1880092730341147170

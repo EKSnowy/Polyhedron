@@ -17,6 +17,8 @@ public class Enemy_Script : MonoBehaviour
     public float maxHealth;
     public HealthBar_Script HB;
 
+    public GameObject Fire;
+
     private void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
@@ -86,5 +88,27 @@ public class Enemy_Script : MonoBehaviour
         {
             Death();
         }
+    }
+
+    public void startBurn(float amount, float damage)
+    {
+        StartCoroutine(Burn(amount, damage));
+    }
+    
+    public IEnumerator Burn(float amount, float damage)
+    {
+        float burnCounter = amount;
+        Debug.Log("burning");
+        
+        while (burnCounter > 0)
+        {
+            
+            Fire.SetActive(true);
+            yield return new WaitForSeconds(1);
+            takeDamage(damage);
+            burnCounter--;
+        }
+        
+        Fire.SetActive(false);
     }
 }
