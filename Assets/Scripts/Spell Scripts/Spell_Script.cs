@@ -121,7 +121,7 @@ public class Spell_Script : MonoBehaviour
             maxFireTimer = 1;
             
             //Maxed level
-            maxShield = true;
+            maxFire = true;
             maxSpell = true;
             rerollLevel++;
         }
