@@ -12,6 +12,7 @@ TagManager:
   - Wall
   - Game Manager
   - Shield
+  - Gun
   layers:
   - Default
   - TransparentFX

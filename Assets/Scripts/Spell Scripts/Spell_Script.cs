@@ -47,7 +47,6 @@ public class Spell_Script : MonoBehaviour
     public float shieldHealth;
     //Spell Objects
     public GameObject Fireball;
-    public GameObject Iceshards;
     public GameObject LightningDome;
     public GameObject BouncyBall;
     public GameObject Hypnosis;
@@ -56,6 +55,7 @@ public class Spell_Script : MonoBehaviour
     public GameObject shield2;
     public GameObject shield3;
     public GameObject shield4;
+    
     //Spell Scripts
     public Fireball_Script fireScript;
     public Ice_Script iceScript;
@@ -91,6 +91,15 @@ public class Spell_Script : MonoBehaviour
                     Instantiate(Fireball, player.position, Quaternion.identity);
                     fireTimer = maxFireTimer;
                 }
+            }
+        }
+        
+        //Ice Toggle//
+        if (toggleIce)
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+            {
+                
             }
         }
     }

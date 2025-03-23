@@ -98,11 +98,9 @@ public class Enemy_Script : MonoBehaviour
     public IEnumerator Burn(float amount, float damage)
     {
         float burnCounter = amount;
-        Debug.Log("burning");
         
         while (burnCounter > 0)
         {
-            
             Fire.SetActive(true);
             yield return new WaitForSeconds(1);
             takeDamage(damage);

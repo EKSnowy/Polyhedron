@@ -207,6 +207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4690024224170183137}
+  - component: {fileID: 873310076609335757}
   m_Layer: 0
   m_Name: Shields
   m_TagString: Shield
@@ -232,6 +233,20 @@ Transform:
   - {fileID: 8761881333780834595}
   m_Father: {fileID: 3374372700688330649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &873310076609335757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4685886815689826727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe148bfd64691dc45b687109687b3fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 100
+  rotationType: Shields
 --- !u!1 &4850883477918650867
 GameObject:
   m_ObjectHideFlags: 0
