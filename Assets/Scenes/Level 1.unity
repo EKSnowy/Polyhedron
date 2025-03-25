@@ -555,7 +555,7 @@ MonoBehaviour:
   hypnosisDamage: 0
   shieldHealth: 0
   Fireball: {fileID: 568059249390451081, guid: 1b631951b32c34d4cbcfc378e3cc27a9, type: 3}
-  LightningDome: {fileID: 0}
+  LightningDome: {fileID: 946889527}
   BouncyBall: {fileID: 0}
   Hypnosis: {fileID: 0}
   shield1: {fileID: 1096094235}
@@ -564,7 +564,7 @@ MonoBehaviour:
   shield4: {fileID: 216564204}
   fireScript: {fileID: 2983143043068048358, guid: 1b631951b32c34d4cbcfc378e3cc27a9, type: 3}
   iceScript: {fileID: 48791453}
-  lightningScript: {fileID: 0}
+  lightningScript: {fileID: 946889532}
   ballScript: {fileID: 0}
   hypnosisScript: {fileID: 0}
   shieldScript1: {fileID: 1096094240}
@@ -1372,7 +1372,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &582488528
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1771,6 +1771,22 @@ RectTransform:
   m_AnchoredPosition: {x: 49.4, y: -1.5}
   m_SizeDelta: {x: -197.064, y: -96.328}
   m_Pivot: {x: 0.50000006, y: 0.5}
+--- !u!1 &946889527 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5854572723049476630, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
+  m_PrefabInstance: {fileID: 930794285758574371}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &946889532 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2895262572218555031, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
+  m_PrefabInstance: {fileID: 930794285758574371}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 946889527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05d33b0cfc0eb0b43a06302e25f86fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1004151756 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6944403033432642487, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
@@ -5096,7 +5112,7 @@ AudioSource:
   m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
-  Mute: 1
+  Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128

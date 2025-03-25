@@ -19,6 +19,8 @@ public class Enemy_Script : MonoBehaviour
 
     public GameObject Fire;
 
+    public bool inLightning;
+
     private void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
@@ -90,6 +92,7 @@ public class Enemy_Script : MonoBehaviour
         }
     }
 
+    //////Burn//////
     public void startBurn(float amount, float damage)
     {
         StartCoroutine(Burn(amount, damage));
@@ -108,5 +111,27 @@ public class Enemy_Script : MonoBehaviour
         }
         
         Fire.SetActive(false);
+    }
+    
+    //////Lightning//////
+    public void startLightning(float time, float damage)
+    {
+        inLightning = true;
+        StartCoroutine(takeLightningDamage(time, damage));
+    }
+    
+    public void stopLightning()
+    {
+        inLightning = false;
+        StopCoroutine(takeLightningDamage(0,0));
+    }
+    
+    public IEnumerator takeLightningDamage(float time, float damage)
+    {
+        while (inLightning)
+        {
+            takeDamage(damage);
+            yield return new WaitForSeconds(time);
+        }
     }
 }

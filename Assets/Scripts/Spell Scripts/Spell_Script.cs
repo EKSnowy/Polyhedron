@@ -117,6 +117,12 @@ public class Spell_Script : MonoBehaviour
         //Lightning Toggle//
         if (toggleLightning)
         {
+            LightningDome.SetActive(true);
+        }
+        
+        //Ball Toggle//
+        if (toggleBall)
+        {
             
         }
     }
@@ -207,16 +213,41 @@ public class Spell_Script : MonoBehaviour
         {
             toggleLightning = true;
             lightningScript.setDamage(1);
+            lightningScript.setTime(1);
+            lightningScript.setSize(2.5f,2.5f);
         }
         
         else if (lightningLevel == 2)
         {
-            
+            lightningScript.setDamage(1.5f);
+            lightningScript.setTime(.9f);
+            lightningScript.setSize(3f,3f);
         }
         
         else if (lightningLevel == 3)
         {
+            lightningScript.setDamage(2);
+            lightningScript.setTime(.8f);
+            lightningScript.setSize(3.5f,3.5f);
+        }
+        
+        else if (lightningLevel == 4)
+        {
+            lightningScript.setDamage(2.5f);
+            lightningScript.setTime(.7f);
+            lightningScript.setSize(4f,4f);
+        }
+        
+        else if (lightningLevel == 5)
+        {
+            lightningScript.setDamage(3);
+            lightningScript.setTime(.6f);
+            lightningScript.setSize(4.5f,4.5f);
             
+            //Maxed level
+            maxLightning = true;
+            maxSpell = true;
+            rerollLevel++;
         }
     }
     

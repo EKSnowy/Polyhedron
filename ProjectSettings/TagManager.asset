@@ -12,7 +12,7 @@ TagManager:
   - Wall
   - Game Manager
   - Shield
-  - Gun
+  - Lightning
   layers:
   - Default
   - TransparentFX
