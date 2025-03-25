@@ -12,6 +12,7 @@ public class Shield_Script : MonoBehaviour
     public float speed;
     
     public Transform target;
+    public SpriteRenderer SR;
     void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
@@ -33,7 +34,7 @@ public class Shield_Script : MonoBehaviour
         if (resetTimer)
         {
             gameObject.GetComponent<BoxCollider2D>().enabled = true;
-            gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            SR.enabled = true;
             
             health = maxHealth;
             resetTimer = false;
@@ -55,6 +56,11 @@ public class Shield_Script : MonoBehaviour
         }
     }
 
+    public void disableSprite()
+    {
+        SR.enabled = false;
+    }
+
     public void setHealth(float num)
     {
         maxHealth = num;
@@ -69,7 +75,7 @@ public class Shield_Script : MonoBehaviour
         if (health <= 0)
         {
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            SR.enabled = false;
         }
     }
 }

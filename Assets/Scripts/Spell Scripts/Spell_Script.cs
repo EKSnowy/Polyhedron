@@ -74,6 +74,11 @@ public class Spell_Script : MonoBehaviour
     private void Start()
     {
         player = GameObject.FindWithTag("Player").transform;
+        
+        shieldScript1.disableSprite();
+        shieldScript2.disableSprite();
+        shieldScript3.disableSprite();
+        shieldScript4.disableSprite();
     }
 
     void Update()
