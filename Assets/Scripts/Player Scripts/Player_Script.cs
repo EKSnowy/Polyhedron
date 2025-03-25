@@ -11,12 +11,9 @@ public class Player_Script : MonoBehaviour
     
     public float invTimer;
     public bool isInv;
-    
-    static Gun_Script[] guns;
     void Start()
     {
         health = 5;
-        guns = transform.GetComponentsInChildren<Gun_Script>();
     }
     
     void Update()
@@ -29,14 +26,6 @@ public class Player_Script : MonoBehaviour
         else
         {
             isInv = false;
-        }
-
-        if (Input.GetMouseButtonDown(0))
-        {
-            foreach (Gun_Script gun in guns)
-            {
-                gun.Shoot();
-            }
         }
     }
 

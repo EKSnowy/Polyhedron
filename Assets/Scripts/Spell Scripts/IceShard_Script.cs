@@ -5,34 +5,41 @@ using UnityEngine;
 
 public class IceShard_Script : MonoBehaviour
 {
-    public Vector2 direction = new Vector2(1, 0);
-    public float speed = 2;
-
-    public Vector2 velocity;
-    //public Gun_Script Gun;
+    public float damage;
+    public ParticleSystem particle;
+    
     void Start()
     {
-        /*Gun = GameObject.FindWithTag("Gun").GetComponent<Gun_Script>();
-        
-        //Looks at that position
-        var offset = -90f;
-        Vector2 direction = Gun.getDirection();
-        direction.Normalize();
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
-        transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));*/
-        
-        Destroy(gameObject,3);
-    }
-    
-    void Update()
-    {
-        velocity = direction * speed;
+        Destroy(gameObject,2);
     }
 
-    private void FixedUpdate()
+    public void setDamage(float num)
     {
-        Vector2 pos = transform.position;
-        pos += velocity * Time.fixedDeltaTime;
-        transform.position = pos;
+        damage = num;
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Circle Enemy")
+        {
+            Enemy_Script circle = other.GetComponent<Enemy_Script>();
+            circle.takeDamage(damage);
+        }
+        else if (other.tag == "Square Enemy")
+        {
+            Enemy_Script square = other.GetComponent<Enemy_Script>();
+            square.takeDamage(damage);
+        }
+        else if (other.tag == "Triangle Enemy")
+        {
+            Enemy_Script triangle = other.GetComponent<Enemy_Script>();
+            triangle.takeDamage(damage);
+        }
+    }
+
+    public void Death()
+    {
+        Instantiate(particle, transform.position, Quaternion.identity);
+        Destroy(gameObject);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class Gun_Script : MonoBehaviour
 {
-    public IceShard_Script iceShard;
+    /*public IceShard_Script iceShard;
     public Vector2 direction;
 
     public void Update()
@@ -24,5 +24,7 @@ public class Gun_Script : MonoBehaviour
     public Vector2 getDirection()
     {
         return direction;
-    }
+    }*/
+
+    
 }

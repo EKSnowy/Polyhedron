@@ -8,24 +8,58 @@ using Vector3 = UnityEngine.Vector3;
 
 public class Ice_Script : MonoBehaviour
 {
-    public float damage;
-    public float speed;
     public GameObject iceShard;
     public IceShard_Script iceScript;
+    public Transform shootingPos;
     
+    public float bulletSpeed;
+    public float bulletAmount;
+
+    public void setBulletAmount(float amount)
+    {
+        bulletAmount = amount;
+    }
+
     public void setDamage(float num)
     {
-        //iceScript.setDamage(num);
+        iceScript.setDamage(num);
     }
-
-    public void setSpeed(float num)
-    {
-        //iceScript.setSpeed(num);
-    }
-
+    
+    
     public void Shoot()
     {
-       Instantiate(iceShard, transform.position, transform.rotation);
+        for (int i = 0; i < bulletAmount; i++)
+        {
+            var spawnedBullet = Instantiate(iceShard, shootingPos.position, shootingPos.rotation);
+            spawnedBullet.transform.position = 
+                new Vector3(shootingPos.position.x,shootingPos.position.y,-1f);
+            
+            Rigidbody2D bulletRB = spawnedBullet.GetComponent<Rigidbody2D>();
+            bulletRB.AddForce(transform.up * bulletSpeed);
+            
+            switch (i)
+            {
+                case 1:
+                    spawnedBullet.transform.position = 
+                        new Vector3(shootingPos.position.x + .8f,shootingPos.position.y + .8f,-1f);
+                    break;
+                
+                case 2:
+                    spawnedBullet.transform.position = 
+                        new Vector3(shootingPos.position.x + -.8f,shootingPos.position.y + .8f,-1f);
+                    break;
+                
+                case 3:
+                    spawnedBullet.transform.position = 
+                        new Vector3(shootingPos.position.x + 1.6f,shootingPos.position.y + -.5f,-1f);
+                    break;
+                
+                case 4:
+                    spawnedBullet.transform.position = 
+                        new Vector3(shootingPos.position.x + -1.6f,shootingPos.position.y + -.5f,-1f);
+                    break;
+            }
+        }
     }
 
 }

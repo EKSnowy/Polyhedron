@@ -171,6 +171,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41b015a5ae7dbf84ab8b6cb7f4e6fd01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  direction: {x: 1, y: 0}
-  speed: 10
-  velocity: {x: 0, y: 0}
+  damage: 1
+  particle: {fileID: 8740461485472179961, guid: dc919fbe5c490af4aa9806e36e5f1857, type: 3}

@@ -19,6 +19,8 @@ public class Spell_Script : MonoBehaviour
     public float maxFireTimer;
     
     public float iceTimer;
+    public float maxIceTimer;
+    
     public float ballTimer;
     public float hypnosisTimer;
     public float shieldTimer;
@@ -97,10 +99,25 @@ public class Spell_Script : MonoBehaviour
         //Ice Toggle//
         if (toggleIce)
         {
-            if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+            if (iceTimer > 0)
             {
-                
+                iceTimer -= Time.deltaTime;
             }
+            //If cooldown up
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
+                {
+                    iceScript.Shoot();
+                    iceTimer = maxIceTimer;
+                }
+            }
+        }
+
+        //Lightning Toggle//
+        if (toggleLightning)
+        {
+            
         }
     }
 ///////////// Fire Spell /////////////////
@@ -127,7 +144,6 @@ public class Spell_Script : MonoBehaviour
         {
             fireScript.setDamage(8);
             fireScript.setBurn(5,2);
-            maxFireTimer = 1;
             
             //Maxed level
             maxFire = true;
@@ -144,17 +160,41 @@ public class Spell_Script : MonoBehaviour
         if (iceLevel == 1)
         {
             toggleIce = true;
-            iceScript.setDamage(1);
+            maxIceTimer = 3f;
+            iceScript.setBulletAmount(1);
+            iceScript.setDamage(2);
         }
         
         else if (iceLevel == 2)
         {
-            
+            iceScript.setBulletAmount(2);
+            iceScript.setDamage(3);
         }
         
         else if (iceLevel == 3)
         {
+            maxIceTimer = 2f;
+            iceScript.setBulletAmount(3);
+            iceScript.setDamage(4);
+        }
+        
+        else if (iceLevel == 4)
+        {
+            maxIceTimer = 2f;
+            iceScript.setBulletAmount(4);
+            iceScript.setDamage(5);
+        }
+        
+        else if (iceLevel == 5)
+        {
+            maxIceTimer = 1f;
+            iceScript.setBulletAmount(5);
+            iceScript.setDamage(6);
             
+            //Maxed level
+            maxIce = true;
+            maxSpell = true;
+            rerollLevel++;
         }
     }
     
