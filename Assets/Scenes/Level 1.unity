@@ -535,6 +535,7 @@ MonoBehaviour:
   ballTimer: 0
   maxBallTimer: 0
   hypnosisTimer: 0
+  maxHypnosisTimer: 0
   toggleFire: 0
   toggleIce: 0
   toggleLightning: 0
@@ -558,7 +559,7 @@ MonoBehaviour:
   LightningDome: {fileID: 946889527}
   BouncyBall: {fileID: 7702769587816558012, guid: 1dfa833dcbedf6849834db03cf644719, type: 3}
   BallList: []
-  Hypnosis: {fileID: 0}
+  Hypnosis: {fileID: 4633178310418256047, guid: f3d4a59f4463c2849986ec8fb19cb547, type: 3}
   shield1: {fileID: 1096094235}
   shield2: {fileID: 697695792}
   shield3: {fileID: 1004151756}
@@ -567,7 +568,7 @@ MonoBehaviour:
   iceScript: {fileID: 48791453}
   lightningScript: {fileID: 946889532}
   ballScript: {fileID: 3331571885580793372, guid: 1dfa833dcbedf6849834db03cf644719, type: 3}
-  hypnosisScript: {fileID: 0}
+  hypnosisScript: {fileID: 7636030050553820432, guid: f3d4a59f4463c2849986ec8fb19cb547, type: 3}
   shieldScript1: {fileID: 1096094240}
   shieldScript2: {fileID: 697695795}
   shieldScript3: {fileID: 1004151759}
@@ -1373,7 +1374,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &582488528
 AudioSource:
   m_ObjectHideFlags: 0

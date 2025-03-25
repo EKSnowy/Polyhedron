@@ -20,6 +20,7 @@ public class Enemy_Script : MonoBehaviour
     public GameObject Fire;
 
     public bool inLightning;
+    public bool isStunned;
 
     private void Start()
     {
@@ -50,28 +51,32 @@ public class Enemy_Script : MonoBehaviour
 
     void Update()
     {
-        //If square enemy, only follows if far away from the player
-        if (gameObject.tag == "Square Enemy")
+        //If not stunned, can move and rotate
+        if (!isStunned)
         {
-            if (Vector3.Distance(transform.position, target.position) > 3f)
+            //If square enemy, only follows if far away from the player
+            if (gameObject.tag == "Square Enemy")
+            {
+                if (Vector3.Distance(transform.position, target.position) > 3f)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, target.position, 
+                        speed * Time.deltaTime);
+                }
+            }
+            //If triangle enemy, always follows player
+            else if (gameObject.tag == "Triangle Enemy")
             {
                 transform.position = Vector2.MoveTowards(transform.position, target.position, 
                     speed * Time.deltaTime);
             }
-        }
-        //If triangle enemy, always follows player
-        else if (gameObject.tag == "Triangle Enemy")
-        {
-            transform.position = Vector2.MoveTowards(transform.position, target.position, 
-                speed * Time.deltaTime);
-        }
         
-        //Rotates to look at player
-        var offset = 90f;
-        Vector2 direction = target.position - transform.position;
-        direction.Normalize();
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
-        transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+            //Rotates to look at player
+            var offset = 90f;
+            Vector2 direction = target.position - transform.position;
+            direction.Normalize();
+            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
+            transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+        }
     }
 
     public void Death()
@@ -133,5 +138,18 @@ public class Enemy_Script : MonoBehaviour
             takeDamage(damage);
             yield return new WaitForSeconds(time);
         }
+    }
+    
+    ///////Hypnosis///////
+    public void startHypnosis(float duration)
+    {
+        StartCoroutine(Sleep(duration));
+    }
+    
+    public IEnumerator Sleep(float duration)
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(duration);
+        isStunned = false;
     }
 }

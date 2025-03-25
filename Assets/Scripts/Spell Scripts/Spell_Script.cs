@@ -26,6 +26,7 @@ public class Spell_Script : MonoBehaviour
     public float maxBallTimer;
     
     public float hypnosisTimer;
+    public float maxHypnosisTimer;
     //Spell booleans
     public bool toggleFire;
     public bool toggleIce;
@@ -146,6 +147,24 @@ public class Spell_Script : MonoBehaviour
                     script.Fling();
                 }
                 ballTimer = maxBallTimer;
+            }
+        }
+
+        //Hypnosis toggle//
+        if (toggleHypnosis)
+        {
+            if (hypnosisTimer > 0)
+            {
+                hypnosisTimer -= Time.deltaTime;
+            }
+            //If cooldown is up
+            else
+            {
+                if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
+                {
+                    Instantiate(Hypnosis, player.position, Quaternion.identity);
+                    hypnosisTimer = maxHypnosisTimer;
+                }
             }
         }
     }
@@ -378,16 +397,48 @@ public class Spell_Script : MonoBehaviour
         if (hypnosisLevel == 1)
         {
             toggleHypnosis = true;
+            
+            hypnosisScript.setDamage(0);
+            hypnosisScript.setSize(.6f,.6f);
+            hypnosisScript.setDuration(.5f);
+            maxHypnosisTimer = 5;
         }
         
         else if (hypnosisLevel == 2)
         {
-            
+            hypnosisScript.setDamage(1);
+            hypnosisScript.setSize(.65f,.65f);
+            hypnosisScript.setDuration(.6f);
+            maxHypnosisTimer = 4;
         }
         
         else if (hypnosisLevel == 3)
         {
+            hypnosisScript.setDamage(2);
+            hypnosisScript.setSize(.7f,.7f);
+            hypnosisScript.setDuration(.7f);
+            maxHypnosisTimer = 3;
+        }
+        
+        else if (hypnosisLevel == 4)
+        {
+            hypnosisScript.setDamage(3);
+            hypnosisScript.setSize(.75f,.75f);
+            hypnosisScript.setDuration(.8f);
+            maxHypnosisTimer = 2;
+        }
+        
+        else if (hypnosisLevel == 5)
+        {
+            hypnosisScript.setDamage(4);
+            hypnosisScript.setSize(.8f,.8f);
+            hypnosisScript.setDuration(.9f);
+            maxHypnosisTimer = 1.5f;
             
+            //Maxed level
+            maxHypnosis = true;
+            maxSpell = true;
+            rerollLevel++;
         }
     }
     

@@ -156,8 +156,8 @@ public class Wave_Manager : MonoBehaviour
         {
             rerollButton.SetActive(true);
             
-            //If no more rerolls, disables button and activates close shop
-            if (rerollCounter <= 0)
+            //If no more rerolls or maxed all spells, disables button and activates close shop
+            if (rerollCounter <= 0 || spellManager.getReroll() == 6)
             {
                 rerollButton.SetActive(false);
                 closeButton.SetActive(true);
