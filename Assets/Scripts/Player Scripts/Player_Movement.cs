@@ -48,9 +48,18 @@ public class Player_Movement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        //Ignores the bouncy ball's collision
+        if (gameObject.tag == "Player")
+        {
+            if (other.gameObject.tag == "Ball")
+            {
+                Physics2D.IgnoreCollision(gameObject.GetComponent<Collider2D>(),other.collider);
+            }
+        }
+        //Bounces off walls
         var speed = lastVelocity.magnitude;
         var direction = Vector3.Reflect(lastVelocity.normalized, 
-            other.contacts[0].normal);
+            other.GetContact(0).normal);
         RB.velocity = direction * Mathf.Max(speed, 0f);
     }
 

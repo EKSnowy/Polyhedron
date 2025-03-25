@@ -363,6 +363,7 @@ MonoBehaviour:
   maxHealth: 0
   HB: {fileID: 382677360861988284}
   Fire: {fileID: 413424842950537795}
+  inLightning: 0
 --- !u!1 &4365593619541783285
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +414,7 @@ GameObject:
   - component: {fileID: 5486368954214721250}
   m_Layer: 0
   m_Name: Shield
-  m_TagString: Untagged
+  m_TagString: Enemy Shield
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

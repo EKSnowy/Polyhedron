@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class Spell_Script : MonoBehaviour
 {
@@ -22,8 +23,9 @@ public class Spell_Script : MonoBehaviour
     public float maxIceTimer;
     
     public float ballTimer;
+    public float maxBallTimer;
+    
     public float hypnosisTimer;
-    public float shieldTimer;
     //Spell booleans
     public bool toggleFire;
     public bool toggleIce;
@@ -51,6 +53,7 @@ public class Spell_Script : MonoBehaviour
     public GameObject Fireball;
     public GameObject LightningDome;
     public GameObject BouncyBall;
+    public List<GameObject> BallList;
     public GameObject Hypnosis;
     
     public GameObject shield1;
@@ -75,6 +78,7 @@ public class Spell_Script : MonoBehaviour
     {
         player = GameObject.FindWithTag("Player").transform;
         
+        //Since Sprite is separate from shield, it turns off the sprites at the start
         shieldScript1.disableSprite();
         shieldScript2.disableSprite();
         shieldScript3.disableSprite();
@@ -128,7 +132,21 @@ public class Spell_Script : MonoBehaviour
         //Ball Toggle//
         if (toggleBall)
         {
+            BouncyBall.SetActive(true);
             
+            if (ballTimer > 0)
+            {
+                ballTimer -= Time.deltaTime;
+            }
+            else
+            {
+                foreach (GameObject ball in BallList)
+                {
+                    Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                    script.Fling();
+                }
+                ballTimer = maxBallTimer;
+            }
         }
     }
 ///////////// Fire Spell /////////////////
@@ -264,17 +282,91 @@ public class Spell_Script : MonoBehaviour
         if (ballLevel == 1)
         {
             toggleBall = true;
-            ballScript.setDamage(1);
+            
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
+            
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+            
+            ballScript.setDamage(2);
+            ballScript.setSpeed(.1f,.15f);
+            maxBallTimer = 20;
         }
         
         else if (ballLevel == 2)
         {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
             
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+
+            ballTimer = 0;
+
+            foreach (GameObject ball in BallList)
+            {
+                Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                script.setDamage(3);
+            }
         }
         
         else if (ballLevel == 3)
         {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
             
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+
+            ballTimer = 0;
+            maxBallTimer = 15;
+            
+            foreach (GameObject ball in BallList)
+            {
+                Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                script.setDamage(4);
+            }
+        }
+        
+        else if (ballLevel == 4)
+        {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
+            
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+
+            ballTimer = 0;
+            
+            foreach (GameObject ball in BallList)
+            {
+                Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                script.setDamage(5);
+            }
+        }
+        
+        else if (ballLevel == 5)
+        {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
+            
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+
+            ballTimer = 0;
+            maxBallTimer = 10;
+            
+            foreach (GameObject ball in BallList)
+            {
+                Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                script.setDamage(6);
+            }
+            
+            //Maxed level
+            maxBall = true;
+            maxSpell = true;
+            rerollLevel++;
         }
     }
     

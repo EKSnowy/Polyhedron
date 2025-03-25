@@ -13,6 +13,8 @@ TagManager:
   - Game Manager
   - Shield
   - Lightning
+  - Ball
+  - Enemy Shield
   layers:
   - Default
   - TransparentFX
