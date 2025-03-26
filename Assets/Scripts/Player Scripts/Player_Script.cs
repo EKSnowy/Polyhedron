@@ -23,8 +23,8 @@ public class Player_Script : MonoBehaviour
     {
         if (invTimer >= 0)
         {
-            invTimer -= Time.deltaTime;
             isInv = true;
+            invTimer -= Time.deltaTime;
         }
         else
         {
@@ -61,11 +61,14 @@ public class Player_Script : MonoBehaviour
         
         else if (other.gameObject.CompareTag("Bullet"))
         {
-            health--;
-            healthChecker();
+            if (!isInv)
+            {
+                health--;
+                healthChecker();
+            }
         }
     }
-
+    
     public void addHealth(float num)
     {
         health += num;
@@ -87,6 +90,7 @@ public class Player_Script : MonoBehaviour
     //Invincibility frames for dashing
     public void setInvTimer(float num)
     {
+        isInv = true;
         invTimer = num;
     }
 

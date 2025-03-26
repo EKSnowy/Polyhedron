@@ -112,7 +112,7 @@ public class Throw_Script : MonoBehaviour
                 endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
                 endPoint.z = 0;
 
-                player.setInvTimer(.8f);
+                player.setInvTimer(1f);
                 transform.position = endPoint;
                 calculateDash();
                 TS.Render(false);
