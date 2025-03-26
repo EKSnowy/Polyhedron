@@ -15,6 +15,13 @@ public class Enemy_Script : MonoBehaviour
 
     public float health;
     public float maxHealth;
+    
+    public float maxHighHealth;
+    public float minHighHealth;
+
+    public float maxLowHealth;
+    public float minLowHealth;
+    
     public HealthBar_Script HB;
 
     public GameObject Fire;
@@ -32,21 +39,38 @@ public class Enemy_Script : MonoBehaviour
         if (gameObject.tag == "Triangle Enemy")
         {
             speed = Random.Range(2, 5);
-            health = 3;
-            maxHealth = 3;
+            maxHealth = Random.Range(maxLowHealth,minLowHealth);
+            health = maxHealth;
         }
         else if (gameObject.tag == "Square Enemy")
         {
             speed = Random.Range(1, 3);
-            health = 5;
-            maxHealth = 5;
+            maxHealth = Random.Range(maxHighHealth,minHighHealth);
+            health = maxHealth;
         }
         else if (gameObject.tag == "Circle Enemy")
         {
-            health = 3;
-            maxHealth = 3;
+            maxHealth = Random.Range(maxLowHealth,minLowHealth);
+            health = maxHealth;
         }
         
+    }
+
+    public void setLowHealth(float min, float max)
+    {
+         minLowHealth = min;
+         maxLowHealth = max;
+    }
+    
+    public void setHighHealth(float min, float max)
+    {
+        minHighHealth = min;
+        maxHighHealth = max;
+    }
+
+    public void addHealth(float num)
+    {
+        maxHealth += num;
     }
 
     void Update()

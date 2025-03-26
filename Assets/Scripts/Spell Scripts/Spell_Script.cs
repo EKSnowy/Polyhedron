@@ -185,13 +185,14 @@ public class Spell_Script : MonoBehaviour
         {
             fireScript.setDamage(5);
             fireScript.setBurn(3,2);
-            maxFireTimer = 2;
+            maxFireTimer = 2.5f;
         }
         
         else if (fireLevel == 3)
         {
             fireScript.setDamage(8);
             fireScript.setBurn(5,2);
+            maxFireTimer = 2;
             
             //Maxed level
             maxFire = true;

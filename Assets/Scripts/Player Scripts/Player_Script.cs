@@ -11,6 +11,9 @@ public class Player_Script : MonoBehaviour
     
     public float invTimer;
     public bool isInv;
+
+    public GameObject deathScreen;
+    public bool isDead;
     void Start()
     {
         health = 5;
@@ -63,13 +66,21 @@ public class Player_Script : MonoBehaviour
         }
     }
 
+    public void addHealth(float num)
+    {
+        health += num;
+        healthChecker();
+    }
+
     public void healthChecker()
     {
         healthText.text = "" + health;
         
         if (health <= 0)
         {
-            Debug.Log("Dead");
+            deathScreen.SetActive(true);
+            isDead = true;
+            Time.timeScale = 0;
         }
     }
 
@@ -77,5 +88,10 @@ public class Player_Script : MonoBehaviour
     public void setInvTimer(float num)
     {
         invTimer = num;
+    }
+
+    public float getHealth()
+    {
+        return health;
     }
 }

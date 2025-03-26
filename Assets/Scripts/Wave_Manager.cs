@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Wave_Manager : MonoBehaviour
 {
@@ -40,6 +41,11 @@ public class Wave_Manager : MonoBehaviour
     public int randomSpell3;
 
     public Spell_Script spellManager;
+    public Enemy_Script enemyShieldScript;
+    public Enemy_Script enemyHazardScript;
+    public Enemy_Script enemyCircleScript;
+
+    public Player_Script player;
     void Start()
     {
         AM = GameObject.FindWithTag("Audio Manager").GetComponent<Audio_Manager>();
@@ -47,6 +53,10 @@ public class Wave_Manager : MonoBehaviour
         //Controls amount of enemies per wave
         enemyCount = 5;
         canSpawn = true;
+        
+        enemyHazardScript.setLowHealth(2,4);
+        enemyCircleScript.setLowHealth(2,4);
+        enemyShieldScript.setHighHealth(5,6);
     }
     
     void Update()
@@ -117,6 +127,20 @@ public class Wave_Manager : MonoBehaviour
     {
         waves++;
         wavesText.text = "Wave: " + waves;
+        
+        //Waves System//
+        if (waves % 2 == 0)
+        {
+            enemyCount += 2;
+        }
+        else if (waves % 3 == 0)
+        {
+            enemyHazardScript.addHealth(5);
+            enemyCircleScript.addHealth(5);
+            enemyShieldScript.addHealth(5);
+            
+            player.addHealth(1);
+        }
     }
     
     /////////////// Shop ////////////////////
@@ -401,5 +425,13 @@ public class Wave_Manager : MonoBehaviour
     {
         shopUI.SetActive(false);
         canSpawn = true;
+    }
+
+    public void resetLevel()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        string sceneName = currentScene.name;
+        
+        SceneManager.LoadScene(sceneName);
     }
 }

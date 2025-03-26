@@ -37,7 +37,9 @@ public class Throw_Script : MonoBehaviour
 
    void Update()
     {
-        ///////////THROW//////////////
+        if (player.getHealth() > 0)
+        {
+            ///////////THROW//////////////
         //Left mouse button moves player via click and drag
         if (Input.GetMouseButtonDown(0))
         {
@@ -114,6 +116,8 @@ public class Throw_Script : MonoBehaviour
                 calculateDash();
                 TS.Render(false);
             }
+        }
+        
         }
         
         //Placeholder to show the cooldown
