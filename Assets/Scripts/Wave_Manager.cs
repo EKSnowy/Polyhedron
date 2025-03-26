@@ -127,6 +127,9 @@ public class Wave_Manager : MonoBehaviour
     {
         waves++;
         wavesText.text = "Wave: " + waves;
+        Debug.Log("mod 2:"+ waves % 2);
+        Debug.Log("mod 3" + waves % 3);
+        
         
         //Waves System//
         if (waves % 2 == 0)
