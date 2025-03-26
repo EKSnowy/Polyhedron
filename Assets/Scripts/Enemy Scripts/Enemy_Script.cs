@@ -28,7 +28,8 @@ public class Enemy_Script : MonoBehaviour
 
     public bool inLightning;
     public bool isStunned;
-
+    
+    public SpriteRenderer SR;
     private void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
@@ -52,6 +53,8 @@ public class Enemy_Script : MonoBehaviour
         {
             maxHealth = Random.Range(maxLowHealth,minLowHealth);
             health = maxHealth;
+
+            SR = GetComponent<SpriteRenderer>();
         }
         
     }
@@ -175,5 +178,10 @@ public class Enemy_Script : MonoBehaviour
         isStunned = true;
         yield return new WaitForSeconds(duration);
         isStunned = false;
+    }
+
+    public void changeSprite(Sprite sprite)
+    {
+        SR.sprite = sprite;
     }
 }

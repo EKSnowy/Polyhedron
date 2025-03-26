@@ -14,8 +14,13 @@ public class Player_Script : MonoBehaviour
 
     public GameObject deathScreen;
     public bool isDead;
+    
+    public SpriteRenderer SR;
+    public Color normal;
+    public Color transparent;
     void Start()
     {
+        normal = SR.color;
         health = 5;
     }
     
@@ -23,12 +28,13 @@ public class Player_Script : MonoBehaviour
     {
         if (invTimer >= 0)
         {
-            isInv = true;
             invTimer -= Time.deltaTime;
+            SR.color = transparent;
         }
         else
         {
             isInv = false;
+            SR.color = normal;
         }
     }
 
