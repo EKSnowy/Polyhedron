@@ -164,7 +164,7 @@ Transform:
   m_GameObject: {fileID: 6445900767860879257}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.04, y: -0.9, z: 0}
+  m_LocalPosition: {x: 0.04, y: -0.9, z: -1}
   m_LocalScale: {x: 0.48422402, y: 0.520672, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -460,6 +460,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 3374372700688330649, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
   speed: 0
+  rotateSpeed: 0
   particle: {fileID: 522513667301474997, guid: 56bb2060ed8b3ff4d8abc8f74f996db3, type: 3}
   AM: {fileID: 0}
   health: 0

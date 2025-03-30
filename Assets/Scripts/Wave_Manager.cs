@@ -9,27 +9,28 @@ public class Wave_Manager : MonoBehaviour
 {
     public Audio_Manager AM;
     public List<GameObject> EnemyList;
-    
+    [Header("Enemy Check / Spawner")]
     public float spawnTime;
     public float enemyCount;
     public bool canSpawn;
     public bool canCheck;
-
+    [Header("Waves")]
     public float waves;
     public TextMeshPro wavesText;
     public GameObject spawner;
-    
+    [Header("Shop")]
     public GameObject shopUI;
     public bool triggerShop;
-
+    public float shopCounter;
+    [Header("Shop Buttons")]
     public GameObject closeButton;
     public GameObject rerollButton;
     public float rerollCounter;
-    //Spots for the spells
+    [Header("Spell Slots")]
     public Transform spot1;
     public Transform spot2;
     public Transform spot3;
-    //Spell options
+    [Header("Spell Options")]
     public GameObject Option1;
     public GameObject Option2;
     public GameObject Option3;
@@ -39,7 +40,7 @@ public class Wave_Manager : MonoBehaviour
     public int randomSpell1;
     public int randomSpell2;
     public int randomSpell3;
-
+    [Header("Scripts")]
     public Spell_Script spellManager;
     public Enemy_Script enemyShieldScript;
     public Enemy_Script enemyHazardScript;
@@ -53,6 +54,10 @@ public class Wave_Manager : MonoBehaviour
         //Controls amount of enemies per wave
         enemyCount = 5;
         canSpawn = true;
+        
+        enemyHazardScript.resetHealth();
+        enemyCircleScript.resetHealth();
+        enemyShieldScript.resetHealth();
         
         enemyHazardScript.setLowHealth(2,4);
         enemyCircleScript.setLowHealth(2,4);
@@ -74,6 +79,12 @@ public class Wave_Manager : MonoBehaviour
         if (triggerShop)
         {
             startShop();
+            shopCounter++;
+
+            if (shopCounter % 3 == 0)
+            {
+                player.addHealth(1);
+            }
         }
     }
     
@@ -123,26 +134,20 @@ public class Wave_Manager : MonoBehaviour
         EnemyList.Add(obj);
     }
 
+    ////////////////////Waves////////////////////////
     public void addWave()
     {
         waves++;
         wavesText.text = "Wave: " + waves;
-        Debug.Log("mod 2:"+ waves % 2);
-        Debug.Log("mod 3" + waves % 3);
         
+        enemyHazardScript.addHealth(1.5f);
+        enemyCircleScript.addHealth(1.5f);
+        enemyShieldScript.addHealth(1.5f);
         
         //Waves System//
         if (waves % 2 == 0)
         {
             enemyCount += 2;
-        }
-        else if (waves % 3 == 0)
-        {
-            enemyHazardScript.addHealth(5);
-            enemyCircleScript.addHealth(5);
-            enemyShieldScript.addHealth(5);
-            
-            player.addHealth(1);
         }
     }
     
@@ -153,6 +158,7 @@ public class Wave_Manager : MonoBehaviour
         triggerShop = false;
         shopUI.SetActive(true);
         closeButton.SetActive(false);
+        player.setInvTimer(60);
 
         randomSpell1 = Random.Range(1, 7);
         randomSpell2 = Random.Range(1, 7);
@@ -365,7 +371,7 @@ public class Wave_Manager : MonoBehaviour
     }
     
     
-    /////////////// Spells ////////////////////
+    /////////////// Spell Buttons ////////////////////
     
     public void spellHypnosis()
     {
@@ -373,6 +379,7 @@ public class Wave_Manager : MonoBehaviour
         
         shopUI.SetActive(false);
         canSpawn = true;
+        player.setInvTimer(0);
     }
     
     public void spellFireball()
@@ -381,6 +388,7 @@ public class Wave_Manager : MonoBehaviour
         
         shopUI.SetActive(false);
         canSpawn = true;
+        player.setInvTimer(0);
     }
     
     public void spellIceShards()
@@ -389,6 +397,7 @@ public class Wave_Manager : MonoBehaviour
         
         shopUI.SetActive(false);
         canSpawn = true;
+        player.setInvTimer(0);
     }
     
     public void spellLightningDome()
@@ -397,6 +406,7 @@ public class Wave_Manager : MonoBehaviour
         
         shopUI.SetActive(false);
         canSpawn = true;
+        player.setInvTimer(0);
     }
     
     public void spellBouncyBall()
@@ -405,6 +415,7 @@ public class Wave_Manager : MonoBehaviour
         
         shopUI.SetActive(false);
         canSpawn = true;
+        player.setInvTimer(0);
     }
 
     public void spellShield()
@@ -413,6 +424,7 @@ public class Wave_Manager : MonoBehaviour
         
         shopUI.SetActive(false);
         canSpawn = true;
+        player.setInvTimer(0);
     }
 
     public void Reroll()
@@ -428,6 +440,7 @@ public class Wave_Manager : MonoBehaviour
     {
         shopUI.SetActive(false);
         canSpawn = true;
+        player.setInvTimer(0);
     }
 
     public void resetLevel()

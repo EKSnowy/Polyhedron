@@ -357,13 +357,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 3374372700688330649, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
   speed: 0
+  rotateSpeed: 0.01
+  rotateModifier: 0
   particle: {fileID: 3529731386924642023, guid: 05107c9390380e1428e68e9f17558b00, type: 3}
   AM: {fileID: 0}
   health: 0
-  maxHealth: 0
+  maxHealth: 10
+  maxHighHealth: 6
+  minHighHealth: 5
+  maxLowHealth: 0
+  minLowHealth: 0
   HB: {fileID: 382677360861988284}
   Fire: {fileID: 413424842950537795}
   inLightning: 0
+  isStunned: 0
+  SR: {fileID: 0}
+  angle: 0
 --- !u!1 &4365593619541783285
 GameObject:
   m_ObjectHideFlags: 0

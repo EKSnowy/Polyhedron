@@ -9,6 +9,8 @@ public class Enemy_Script : MonoBehaviour
     // Code from: https://discussions.unity.com/t/how-do-you-make-enemies-rotate-to-your-position-in-2d/219214/3 //
     public Transform target;
     public float speed;
+    public float rotateSpeed;
+    public float rotateModifier;
 
     public ParticleSystem particle;
     public Audio_Manager AM;
@@ -22,6 +24,8 @@ public class Enemy_Script : MonoBehaviour
     public float maxLowHealth;
     public float minLowHealth;
     
+    public float healthModifier;
+    
     public HealthBar_Script HB;
 
     public GameObject Fire;
@@ -30,6 +34,7 @@ public class Enemy_Script : MonoBehaviour
     public bool isStunned;
     
     public SpriteRenderer SR;
+    public float angle;
     private void Start()
     {
         target = GameObject.FindWithTag("Player").transform;
@@ -41,17 +46,22 @@ public class Enemy_Script : MonoBehaviour
         {
             speed = Random.Range(2, 5);
             maxHealth = Random.Range(maxLowHealth,minLowHealth);
+            maxHealth += healthModifier;
             health = maxHealth;
         }
         else if (gameObject.tag == "Square Enemy")
         {
             speed = Random.Range(1, 3);
             maxHealth = Random.Range(maxHighHealth,minHighHealth);
+            maxHealth += healthModifier;
             health = maxHealth;
+
+            rotateSpeed = 10;
         }
         else if (gameObject.tag == "Circle Enemy")
         {
             maxHealth = Random.Range(maxLowHealth,minLowHealth);
+            maxHealth += healthModifier;
             health = maxHealth;
 
             SR = GetComponent<SpriteRenderer>();
@@ -73,7 +83,12 @@ public class Enemy_Script : MonoBehaviour
 
     public void addHealth(float num)
     {
-        maxHealth += num;
+        healthModifier += num;
+    }
+
+    public void resetHealth()
+    {
+        healthModifier = 0;
     }
 
     void Update()
@@ -96,16 +111,36 @@ public class Enemy_Script : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, target.position, 
                     speed * Time.deltaTime);
             }
-        
-            //Rotates to look at player
-            var offset = 90f;
-            Vector2 direction = target.position - transform.position;
-            direction.Normalize();
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
-            transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+
+            //Normal enemies rotate to look at player//
+            if (gameObject.tag != "Square Enemy")
+            {
+                //Rotates to look at player
+                var offset = 90f;
+                Vector2 direction = target.position - transform.position;
+                direction.Normalize();
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
+                transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
+            }
+            else
+            {
+                /////////////////WORK IN PROGRESS///////////////
+                
+                //if a shield enemy, rotation lerps to the player
+                Vector2 targetPos = target.position;
+                Vector2 thisPos = transform.position;
+                targetPos.x = targetPos.x - thisPos.x;
+                targetPos.y = targetPos.y - thisPos.y;
+
+                rotateSpeed = .004f;
+                float tangle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg + 90f;
+                angle = Mathf.Lerp(angle,tangle, rotateSpeed);
+                transform.rotation = Quaternion.Euler(0,0,angle);
+                //Debug.Log("angle" + angle);
+                //Debug.Log("tangle" + tangle);
+            }
         }
     }
-
     public void Death()
     {
         AM.playSound(1);

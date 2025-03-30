@@ -895,6 +895,7 @@ MonoBehaviour:
   spawner: {fileID: 5046496261409128819, guid: 4735f518d885e81429c14d2117c855f7, type: 3}
   shopUI: {fileID: 179256446}
   triggerShop: 0
+  shopCounter: 0
   closeButton: {fileID: 14778766}
   rerollButton: {fileID: 1037174887}
   rerollCounter: 0

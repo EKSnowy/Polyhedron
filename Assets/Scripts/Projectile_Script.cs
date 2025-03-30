@@ -40,7 +40,7 @@ public class Projectile_Script : MonoBehaviour
             if (other.tag == "Lightning")
             {
                 //Does this so the projectile goes through the lightning (won't otherwise)
-                Debug.Log("Hit lightning");
+                //Debug.Log("Hit lightning");
             }
             else
             {

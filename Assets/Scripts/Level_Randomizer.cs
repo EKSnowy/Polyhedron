@@ -39,10 +39,4 @@ public class Level_Randomizer : MonoBehaviour
             Layout4.SetActive(true);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

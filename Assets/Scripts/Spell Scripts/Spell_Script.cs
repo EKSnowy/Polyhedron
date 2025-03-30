@@ -6,63 +6,64 @@ using Random = UnityEngine.Random;
 
 public class Spell_Script : MonoBehaviour
 {
-    //Spell levels
+    [Header("Spell Levels")]
     public float fireLevel;
     public float iceLevel;
     public float lightningLevel;
     public float ballLevel;
     public float hypnosisLevel;
     public float shieldLevel;
-
+    [Header("Reroll Level")]
     public float rerollLevel;
-    //Spell timers
+    [Header("Spell Timers")]
+    //Fire
     public float fireTimer;
     public float maxFireTimer;
-    
+    //Ice
     public float iceTimer;
     public float maxIceTimer;
-    
+    //Ball
     public float ballTimer;
     public float maxBallTimer;
-    
+    //Hypnosis
     public float hypnosisTimer;
     public float maxHypnosisTimer;
-    //Spell booleans
+    [Header("Spell Toggles")]
     public bool toggleFire;
     public bool toggleIce;
     public bool toggleLightning;
     public bool toggleBall;
     public bool toggleHypnosis;
     public bool toggleShield;
-
+    [Header("Spell Max Levels")]
     public bool maxFire;
     public bool maxIce;
     public bool maxLightning;
     public bool maxBall;
     public bool maxHypnosis;
     public bool maxShield;
-
+    //If any spells are max
     public bool maxSpell;
-    //Spell damage
+    [Header("Spell Damage")]
     public float fireDamage;
     public float iceDamage;
     public float lightningDamage;
     public float ballDamage;
     public float hypnosisDamage;
     public float shieldHealth;
-    //Spell Objects
+    [Header("Spell Objects")]
     public GameObject Fireball;
     public GameObject LightningDome;
     public GameObject BouncyBall;
     public List<GameObject> BallList;
     public GameObject Hypnosis;
-    
+    [Header("Shield Objects")]
     public GameObject shield1;
     public GameObject shield2;
     public GameObject shield3;
     public GameObject shield4;
     
-    //Spell Scripts
+    [Header("Spell Scripts")]
     public Fireball_Script fireScript;
     public Ice_Script iceScript;
     public Lightning_Script lightningScript;
@@ -183,15 +184,64 @@ public class Spell_Script : MonoBehaviour
         
         else if (fireLevel == 2)
         {
-            fireScript.setDamage(5);
-            fireScript.setBurn(3,2);
+            fireScript.setDamage(6);
+            fireScript.setBurn(3,1);
             maxFireTimer = 2.5f;
         }
         
         else if (fireLevel == 3)
         {
-            fireScript.setDamage(8);
-            fireScript.setBurn(5,2);
+            fireScript.setDamage(9);
+            fireScript.setBurn(4,1);
+            maxFireTimer = 2;
+        }
+        
+        else if (fireLevel == 4)
+        {
+            fireScript.setDamage(12);
+            fireScript.setBurn(5,1);
+            maxFireTimer = 2;
+        }
+        
+        else if (fireLevel == 5)
+        {
+            fireScript.setDamage(15);
+            fireScript.setBurn(6,2);
+            maxFireTimer = 2;
+        }
+        
+        else if (fireLevel == 6)
+        {
+            fireScript.setDamage(18);
+            fireScript.setBurn(7,2);
+            maxFireTimer = 2;
+        }
+        
+        else if (fireLevel == 7)
+        {
+            fireScript.setDamage(21);
+            fireScript.setBurn(8,2);
+            maxFireTimer = 2;
+        }
+        
+        else if (fireLevel == 8)
+        {
+            fireScript.setDamage(24);
+            fireScript.setBurn(9,2);
+            maxFireTimer = 2;
+        }
+        
+        else if (fireLevel == 9)
+        {
+            fireScript.setDamage(27);
+            fireScript.setBurn(10,2);
+            maxFireTimer = 2;
+        }
+        
+        else if (fireLevel == 10)
+        {
+            fireScript.setDamage(30);
+            fireScript.setBurn(11,3);
             maxFireTimer = 2;
             
             //Maxed level
@@ -211,34 +261,69 @@ public class Spell_Script : MonoBehaviour
             toggleIce = true;
             maxIceTimer = 3f;
             iceScript.setBulletAmount(1);
-            iceScript.setDamage(2);
+            iceScript.setDamage(1);
         }
         
         else if (iceLevel == 2)
         {
             iceScript.setBulletAmount(2);
-            iceScript.setDamage(3);
+            iceScript.setDamage(2.5f);
         }
         
         else if (iceLevel == 3)
         {
             maxIceTimer = 2f;
             iceScript.setBulletAmount(3);
-            iceScript.setDamage(4);
+            iceScript.setDamage(4f);
         }
         
         else if (iceLevel == 4)
         {
             maxIceTimer = 2f;
             iceScript.setBulletAmount(4);
-            iceScript.setDamage(5);
+            iceScript.setDamage(5.5f);
         }
         
         else if (iceLevel == 5)
         {
             maxIceTimer = 1f;
             iceScript.setBulletAmount(5);
-            iceScript.setDamage(6);
+            iceScript.setDamage(7f);
+        }
+        
+        else if (iceLevel == 6)
+        {
+            maxIceTimer = .9f;
+            iceScript.setBulletAmount(5);
+            iceScript.setDamage(8.5f);
+        }
+        
+        else if (iceLevel == 7)
+        {
+            maxIceTimer = .8f;
+            iceScript.setBulletAmount(5);
+            iceScript.setDamage(10f);
+        }
+        
+        else if (iceLevel == 8)
+        {
+            maxIceTimer = .7f;
+            iceScript.setBulletAmount(5);
+            iceScript.setDamage(11.5f);
+        }
+        
+        else if (iceLevel == 9)
+        {
+            maxIceTimer = .6f;
+            iceScript.setBulletAmount(5);
+            iceScript.setDamage(13f);
+        }
+        
+        else if (iceLevel == 10)
+        {
+            maxIceTimer = .5f;
+            iceScript.setBulletAmount(5);
+            iceScript.setDamage(14.5f);
             
             //Maxed level
             maxIce = true;
@@ -255,37 +340,72 @@ public class Spell_Script : MonoBehaviour
         if (lightningLevel == 1)
         {
             toggleLightning = true;
-            lightningScript.setDamage(1);
-            lightningScript.setTime(1);
-            lightningScript.setSize(2.5f,2.5f);
+            lightningScript.setDamage(2f);
+            lightningScript.setTime(.8f);
+            lightningScript.setSize(2f,2f);
         }
         
         else if (lightningLevel == 2)
         {
-            lightningScript.setDamage(1.5f);
-            lightningScript.setTime(.9f);
-            lightningScript.setSize(3f,3f);
+            lightningScript.setDamage(4f);
+            lightningScript.setTime(.7f);
+            lightningScript.setSize(2.5f,2.5f);
         }
         
         else if (lightningLevel == 3)
         {
-            lightningScript.setDamage(2);
-            lightningScript.setTime(.8f);
-            lightningScript.setSize(3.5f,3.5f);
+            lightningScript.setDamage(6);
+            lightningScript.setTime(.6f);
+            lightningScript.setSize(3f,3f);
         }
         
         else if (lightningLevel == 4)
         {
-            lightningScript.setDamage(2.5f);
-            lightningScript.setTime(.7f);
-            lightningScript.setSize(4f,4f);
+            lightningScript.setDamage(8f);
+            lightningScript.setTime(.5f);
+            lightningScript.setSize(3.5f,3.5f);
         }
         
         else if (lightningLevel == 5)
         {
-            lightningScript.setDamage(3);
-            lightningScript.setTime(.6f);
+            lightningScript.setDamage(10);
+            lightningScript.setTime(.4f);
+            lightningScript.setSize(4f,4f);
+        }
+        
+        else if (lightningLevel == 6)
+        {
+            lightningScript.setDamage(12f);
+            lightningScript.setTime(.3f);
             lightningScript.setSize(4.5f,4.5f);
+        }
+        
+        else if (lightningLevel == 7)
+        {
+            lightningScript.setDamage(14);
+            lightningScript.setTime(.2f);
+            lightningScript.setSize(5f,5f);
+        }
+        
+        else if (lightningLevel == 8)
+        {
+            lightningScript.setDamage(16f);
+            lightningScript.setTime(.1f);
+            lightningScript.setSize(5.5f,5.5f);
+        }
+        
+        else if (lightningLevel == 9)
+        {
+            lightningScript.setDamage(18);
+            lightningScript.setTime(.09f);
+            lightningScript.setSize(6f,6f);
+        }
+        
+        else if (lightningLevel == 10)
+        {
+            lightningScript.setDamage(20f);
+            lightningScript.setTime(.08f);
+            lightningScript.setSize(6.5f,6.5f);
             
             //Maxed level
             maxLightning = true;
@@ -309,9 +429,9 @@ public class Spell_Script : MonoBehaviour
             BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
                 Quaternion.identity));
             
-            ballScript.setDamage(2);
+            ballScript.setDamage(1);
             ballScript.setSpeed(.1f,.15f);
-            maxBallTimer = 20;
+            maxBallTimer = 15;
         }
         
         else if (ballLevel == 2)
@@ -323,11 +443,12 @@ public class Spell_Script : MonoBehaviour
                 Quaternion.identity));
 
             ballTimer = 0;
-
+            maxBallTimer = 14.5f;
+            
             foreach (GameObject ball in BallList)
             {
                 Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
-                script.setDamage(3);
+                script.setDamage(1.5f);
             }
         }
         
@@ -340,12 +461,12 @@ public class Spell_Script : MonoBehaviour
                 Quaternion.identity));
 
             ballTimer = 0;
-            maxBallTimer = 15;
+            maxBallTimer = 14;
             
             foreach (GameObject ball in BallList)
             {
                 Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
-                script.setDamage(4);
+                script.setDamage(2);
             }
         }
         
@@ -358,6 +479,97 @@ public class Spell_Script : MonoBehaviour
                 Quaternion.identity));
 
             ballTimer = 0;
+            maxBallTimer = 13.5f;
+            
+            foreach (GameObject ball in BallList)
+            {
+                Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                script.setDamage(2.5f);
+            }
+        }
+        
+        else if (ballLevel == 5)
+        {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
+            
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+
+            ballTimer = 0;
+            maxBallTimer = 13;
+            
+            foreach (GameObject ball in BallList)
+            {
+                Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                script.setDamage(3);
+            }
+        }
+        
+        else if (ballLevel == 6)
+        {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
+            
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+
+            ballTimer = 0;
+            maxBallTimer = 12.5f;
+            
+            foreach (GameObject ball in BallList)
+            {
+                Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                script.setDamage(3.5f);
+            }
+        }
+        
+        else if (ballLevel == 7)
+        {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
+            
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+
+            ballTimer = 0;
+            maxBallTimer = 12;
+            
+            foreach (GameObject ball in BallList)
+            {
+                Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                script.setDamage(4);
+            }
+        }
+        
+        else if (ballLevel == 8)
+        {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
+            
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+
+            ballTimer = 0;
+            maxBallTimer = 11.5f;
+            
+            foreach (GameObject ball in BallList)
+            {
+                Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
+                script.setDamage(4.5f);
+            }
+        }
+        
+        else if (ballLevel == 9)
+        {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
+            
+            BallList.Add(Instantiate(BouncyBall,new Vector3(randomX,randomY),
+                Quaternion.identity));
+
+            ballTimer = 0;
+            maxBallTimer = 11;
             
             foreach (GameObject ball in BallList)
             {
@@ -366,7 +578,7 @@ public class Spell_Script : MonoBehaviour
             }
         }
         
-        else if (ballLevel == 5)
+        else if (ballLevel == 10)
         {
             float randomX = Random.Range(-7.9f, 7.9f);
             float randomY = Random.Range(-4f,4f);
@@ -400,7 +612,7 @@ public class Spell_Script : MonoBehaviour
             toggleHypnosis = true;
             
             hypnosisScript.setDamage(0);
-            hypnosisScript.setSize(.6f,.6f);
+            hypnosisScript.setSize(.55f,.55f);
             hypnosisScript.setDuration(.5f);
             maxHypnosisTimer = 5;
         }
@@ -408,7 +620,7 @@ public class Spell_Script : MonoBehaviour
         else if (hypnosisLevel == 2)
         {
             hypnosisScript.setDamage(1);
-            hypnosisScript.setSize(.65f,.65f);
+            hypnosisScript.setSize(.6f,.6f);
             hypnosisScript.setDuration(.6f);
             maxHypnosisTimer = 4;
         }
@@ -416,7 +628,7 @@ public class Spell_Script : MonoBehaviour
         else if (hypnosisLevel == 3)
         {
             hypnosisScript.setDamage(2);
-            hypnosisScript.setSize(.7f,.7f);
+            hypnosisScript.setSize(.65f,.65f);
             hypnosisScript.setDuration(.7f);
             maxHypnosisTimer = 3;
         }
@@ -424,7 +636,7 @@ public class Spell_Script : MonoBehaviour
         else if (hypnosisLevel == 4)
         {
             hypnosisScript.setDamage(3);
-            hypnosisScript.setSize(.75f,.75f);
+            hypnosisScript.setSize(.7f,.7f);
             hypnosisScript.setDuration(.8f);
             maxHypnosisTimer = 2;
         }
@@ -432,9 +644,49 @@ public class Spell_Script : MonoBehaviour
         else if (hypnosisLevel == 5)
         {
             hypnosisScript.setDamage(4);
-            hypnosisScript.setSize(.8f,.8f);
+            hypnosisScript.setSize(.75f,.75f);
             hypnosisScript.setDuration(.9f);
             maxHypnosisTimer = 1.5f;
+        }
+        
+        else if (hypnosisLevel == 6)
+        {
+            hypnosisScript.setDamage(5);
+            hypnosisScript.setSize(.8f,.8f);
+            hypnosisScript.setDuration(1f);
+            maxHypnosisTimer = 1f;
+        }
+        
+        else if (hypnosisLevel == 7)
+        {
+            hypnosisScript.setDamage(6);
+            hypnosisScript.setSize(.85f,.85f);
+            hypnosisScript.setDuration(1.1f);
+            maxHypnosisTimer = 1f;
+        }
+        
+        else if (hypnosisLevel == 8)
+        {
+            hypnosisScript.setDamage(7);
+            hypnosisScript.setSize(.9f,.9f);
+            hypnosisScript.setDuration(1.2f);
+            maxHypnosisTimer = 1f;
+        }
+        
+        else if (hypnosisLevel == 9)
+        {
+            hypnosisScript.setDamage(8);
+            hypnosisScript.setSize(.95f,.95f);
+            hypnosisScript.setDuration(1.3f);
+            maxHypnosisTimer = 1f;
+        }
+        
+        else if (hypnosisLevel == 10)
+        {
+            hypnosisScript.setDamage(9);
+            hypnosisScript.setSize(1f,1f);
+            hypnosisScript.setDuration(1.4f);
+            maxHypnosisTimer = 1f;
             
             //Maxed level
             maxHypnosis = true;
