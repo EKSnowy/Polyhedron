@@ -16,6 +16,9 @@ public class Wave_Manager : MonoBehaviour
     public bool canCheck;
     [Header("Waves")]
     public float waves;
+    public bool isEndless;
+    public bool bossLevel;
+    public float difficultyMod;
     public TextMeshPro wavesText;
     public GameObject spawner;
     [Header("Shop")]
@@ -30,13 +33,8 @@ public class Wave_Manager : MonoBehaviour
     public Transform spot1;
     public Transform spot2;
     public Transform spot3;
-    [Header("Spell Options")]
-    public GameObject Option1;
-    public GameObject Option2;
-    public GameObject Option3;
-    public GameObject Option4;
-    public GameObject Option5;
-    public GameObject Option6;
+    [Header("Spell Options")] 
+    public List<GameObject> spellList;
     public int randomSpell1;
     public int randomSpell2;
     public int randomSpell3;
@@ -45,6 +43,8 @@ public class Wave_Manager : MonoBehaviour
     public Enemy_Script enemyShieldScript;
     public Enemy_Script enemyHazardScript;
     public Enemy_Script enemyCircleScript;
+    public Level_Randomizer randomizer;
+    public Music_Script musicScript;
 
     public Player_Script player;
     void Start()
@@ -53,6 +53,7 @@ public class Wave_Manager : MonoBehaviour
         
         //Controls amount of enemies per wave
         enemyCount = 5;
+        difficultyMod = 1.5f;
         canSpawn = true;
         
         enemyHazardScript.resetHealth();
@@ -66,12 +67,15 @@ public class Wave_Manager : MonoBehaviour
     
     void Update()
     {
-        if (canSpawn)
+        if (!bossLevel)
         {
-            StartCoroutine(Spawn());
+            if (canSpawn)
+            {
+                StartCoroutine(Spawn());
+            }
         }
         
-        else if (canCheck)
+        if (canCheck)
         {
             checkList();
         }
@@ -113,7 +117,6 @@ public class Wave_Manager : MonoBehaviour
     {
         canSpawn = false;
         canCheck = false;
-        addWave();
         
         for (int i = 0; i < enemyCount; i++)
         {
@@ -140,14 +143,27 @@ public class Wave_Manager : MonoBehaviour
         waves++;
         wavesText.text = "Wave:" + waves;
         
-        enemyHazardScript.addHealth(1.5f);
-        enemyCircleScript.addHealth(1.5f);
-        enemyShieldScript.addHealth(1.5f);
+        enemyHazardScript.addHealth(difficultyMod);
+        enemyCircleScript.addHealth(difficultyMod);
+        enemyShieldScript.addHealth(difficultyMod);
         
-        //Waves System//
+        ////////Waves System///////
+        //Every 2 waves, increases count by 2//
         if (waves % 2 == 0)
         {
             enemyCount += 2;
+        }
+        //If on boss stage, play boss music and set up boss level//
+        if (waves == 10)
+        {
+            bossLevel = true;
+            randomizer.bossLevelRandomize();
+            musicScript.playBossSong();
+        }
+        //If on endless, change level every 10 waves//
+        if (waves % 10 == 0 && isEndless)
+        {
+            randomizer.levelRandomize();
         }
     }
     
@@ -160,27 +176,40 @@ public class Wave_Manager : MonoBehaviour
         closeButton.SetActive(false);
         player.setInvTimer(60);
 
-        randomSpell1 = Random.Range(1, 7);
-        randomSpell2 = Random.Range(1, 7);
-        randomSpell3 = Random.Range(1, 7);
-
-        //Prevents options from repeating
-        while (randomSpell2 == randomSpell1 || randomSpell2 == randomSpell3)
+        //If the spell option is maxed, removes from list//
+        for (int i = 0; i < spellList.Count; i++)
         {
-            randomSpell2 = Random.Range(1, 7);
-        }
-        while (randomSpell3 == randomSpell1 || randomSpell3 == randomSpell2)
-        {
-            randomSpell3 = Random.Range(1, 7);
+            SpellOption_Script spellScript = spellList[i].GetComponent<SpellOption_Script>();
+            
+            if (spellScript.getMax())
+            {
+                spellList[i].SetActive(false);
+                spellList.Remove(spellList[i]);
+                i--;
+            }
         }
         
+        randomSpell1 = Random.Range(0, spellList.Count);
+        randomSpell2 = Random.Range(0, spellList.Count);
+        randomSpell3 = Random.Range(0, spellList.Count);
+
+        //Prevents options from repeating if more than 2 options
+        if (spellList.Count > 2)
+        {
+            while (randomSpell2 == randomSpell1 || randomSpell2 == randomSpell3)
+            {
+                randomSpell2 = Random.Range(0, spellList.Count);
+            }
+            while (randomSpell3 == randomSpell1 || randomSpell3 == randomSpell2)
+            {
+                randomSpell3 = Random.Range(0, spellList.Count);
+            }
+        }
         //Prevents options from overlapping with one another
-        Option1.SetActive(false);
-        Option2.SetActive(false);
-        Option3.SetActive(false);
-        Option4.SetActive(false);
-        Option5.SetActive(false);
-        Option6.SetActive(false);
+        foreach (GameObject spell in spellList)
+        {
+            spell.SetActive(false);
+        }
         
         /////// Rerolls ////////
         
@@ -190,186 +219,33 @@ public class Wave_Manager : MonoBehaviour
             rerollButton.SetActive(true);
             
             //If no more rerolls or maxed all spells, disables button and activates close shop
-            if (rerollCounter <= 0 || spellManager.getReroll() == 6)
+            if (rerollCounter <= 0 || spellList.Count <= 0)
             {
-                rerollButton.SetActive(false);
                 closeButton.SetActive(true);
+                rerollButton.SetActive(false);
             }
         }
         else
         {
             rerollButton.SetActive(false);
         }
+
+        //If there are spells left, randomizes which goes in each slot
+        if (spellList.Count > 0)
+        {
+            ///// Slot 1 //////
+            spellList[randomSpell1].transform.position = spot1.position;
+            spellList[randomSpell1].SetActive(true);
+       
+            ///// Slot 2 //////
+            spellList[randomSpell2].transform.position = spot2.position;
+            spellList[randomSpell2].SetActive(true);
         
-        ///// Slot 1 //////
-        if (randomSpell1 == 1)
-        {
-            //Hypnosis
-            if (!spellManager.getHypnosisMax())
-            {
-                Option1.transform.position = spot1.position;
-                Option1.SetActive(true);
-            }
-        }
-        else if (randomSpell1 == 2)
-        {
-            //Fireball
-            if (!spellManager.getFireMax())
-            {
-                Option2.transform.position = spot1.position;
-                Option2.SetActive(true);
-            }
-        }
-        else if (randomSpell1 == 3)
-        {
-            //Ice Shards
-            if (!spellManager.getIceMax())
-            {
-                Option3.transform.position = spot1.position;
-                Option3.SetActive(true);
-            }
-        }
-        else if (randomSpell1 == 4)
-        {
-            //Lightning
-            if (!spellManager.getLightningMax())
-            {
-                Option4.transform.position = spot1.position;
-                Option4.SetActive(true);
-            }
-        }
-        else if (randomSpell1 == 5)
-        {
-            //Ball
-            if (!spellManager.getBallMax())
-            {
-                Option5.transform.position = spot1.position;
-                Option5.SetActive(true);
-            }
-        }
-        else if (randomSpell1 == 6)
-        {
-            //Shield
-            if (!spellManager.getShieldMax())
-            {
-                Option6.transform.position = spot1.position;
-                Option6.SetActive(true);
-            }
-        }
-        
-        ///// Slot 2 //////
-        if (randomSpell2 == 1)
-        {
-            //Hypnosis
-            if (!spellManager.getHypnosisMax())
-            {
-                Option1.transform.position = spot2.position;
-                Option1.SetActive(true);
-            }
-        }
-        else if (randomSpell2 == 2)
-        {
-            //Fireball
-            if (!spellManager.getFireMax())
-            {
-                Option2.transform.position = spot2.position;
-                Option2.SetActive(true);
-            }
-        }
-        else if (randomSpell2 == 3)
-        {
-            //Ice Shards
-            if (!spellManager.getIceMax())
-            {
-                Option3.transform.position = spot2.position;
-                Option3.SetActive(true);
-            }
-        }
-        else if (randomSpell2 == 4)
-        {
-            //Lightning
-            if (!spellManager.getLightningMax())
-            {
-                Option4.transform.position = spot2.position;
-                Option4.SetActive(true);
-            }
-        }
-        else if (randomSpell2 == 5)
-        {
-            //Ball
-            if (!spellManager.getBallMax())
-            {
-                Option5.transform.position = spot2.position;
-                Option5.SetActive(true);
-            }
-        }
-        else if (randomSpell2 == 6)
-        {
-            //Shield
-            if (!spellManager.getShieldMax())
-            {
-                Option6.transform.position = spot2.position;
-                Option6.SetActive(true);
-            }
-        }
-        
-        ///// Slot 3 //////
-        if (randomSpell3 == 1)
-        {
-            //Hypnosis
-            if (!spellManager.getHypnosisMax())
-            {
-                Option1.transform.position = spot3.position;
-                Option1.SetActive(true);
-            }
-        }
-        else if (randomSpell3 == 2)
-        {
-            //Fireball
-            if (!spellManager.getFireMax())
-            {
-                Option2.transform.position = spot3.position;
-                Option2.SetActive(true);
-            }
-        }
-        else if (randomSpell3 == 3)
-        {
-            //Ice Shards
-            if (!spellManager.getIceMax())
-            {
-                Option3.transform.position = spot3.position;
-                Option3.SetActive(true);
-            }
-        }
-        else if (randomSpell3 == 4)
-        {
-            //Lightning
-            if (!spellManager.getLightningMax())
-            {
-                Option4.transform.position = spot3.position;
-                Option4.SetActive(true);
-            }
-        }
-        else if (randomSpell3 == 5)
-        {
-            //Ball
-            if (!spellManager.getBallMax())
-            {
-                Option5.transform.position = spot3.position;
-                Option5.SetActive(true);
-            }
-        }
-        else if (randomSpell3 == 6)
-        {
-            //Shield
-            if (!spellManager.getShieldMax())
-            {
-                Option6.transform.position = spot3.position;
-                Option6.SetActive(true);
-            }
+            ///// Slot 3 //////
+            spellList[randomSpell3].transform.position = spot3.position;
+            spellList[randomSpell3].SetActive(true);
         }
     }
-    
     
     /////////////// Spell Buttons ////////////////////
     
@@ -377,54 +253,42 @@ public class Wave_Manager : MonoBehaviour
     {
         spellManager.addHypnosisLevel();
         
-        shopUI.SetActive(false);
-        canSpawn = true;
-        player.setInvTimer(0);
+        closeShop();
     }
     
     public void spellFireball()
     {
         spellManager.addFireLevel();
         
-        shopUI.SetActive(false);
-        canSpawn = true;
-        player.setInvTimer(0);
+        closeShop();
     }
     
     public void spellIceShards()
     {
         spellManager.addIceLevel();
         
-        shopUI.SetActive(false);
-        canSpawn = true;
-        player.setInvTimer(0);
+        closeShop();
     }
     
     public void spellLightningDome()
     {
         spellManager.addLightningLevel();
         
-        shopUI.SetActive(false);
-        canSpawn = true;
-        player.setInvTimer(0);
+        closeShop();
     }
     
     public void spellBouncyBall()
     {
         spellManager.addBallLevel();
         
-        shopUI.SetActive(false);
-        canSpawn = true;
-        player.setInvTimer(0);
+        closeShop();
     }
 
     public void spellShield()
     {
         spellManager.addShieldLevel();
         
-        shopUI.SetActive(false);
-        canSpawn = true;
-        player.setInvTimer(0);
+        closeShop();
     }
 
     public void Reroll()
@@ -441,6 +305,8 @@ public class Wave_Manager : MonoBehaviour
         shopUI.SetActive(false);
         canSpawn = true;
         player.setInvTimer(0);
+        
+        addWave();
     }
 
     public void resetLevel()
@@ -449,5 +315,24 @@ public class Wave_Manager : MonoBehaviour
         string sceneName = currentScene.name;
         
         SceneManager.LoadScene(sceneName);
+    }
+
+    /////////////////Endless & Boss////////////////////
+    
+    public void toggleEndless()
+    {
+        isEndless = true;
+        musicScript.randomizeSong();
+        randomizer.levelRandomize();
+        difficultyMod = 2f;
+    }
+    
+    //public 
+    
+    //////////Extra///////////
+    
+    public List<GameObject> getList()
+    {
+        return spellList;
     }
 }

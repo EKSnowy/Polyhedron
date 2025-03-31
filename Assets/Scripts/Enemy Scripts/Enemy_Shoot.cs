@@ -11,8 +11,7 @@ public class Enemy_Shoot : MonoBehaviour
 
     public Audio_Manager AM;
 
-    public Sprite CircleEnemy;
-    public Sprite CircleWarning;
+    public GameObject warning;
 
     public Enemy_Script enemy;
     private void Start()
@@ -33,12 +32,12 @@ public class Enemy_Shoot : MonoBehaviour
             Instantiate(bullet, transform.position, Quaternion.identity);
             AM.playSound(0,1);
             bulletCooldown = Random.Range(1, 4);
-            enemy.changeSprite(CircleEnemy);
+            warning.SetActive(false);
         }
 
         if (bulletCooldown <= .5f)
         {
-            enemy.changeSprite(CircleWarning);
+            warning.SetActive(true);
         }
     }
 }

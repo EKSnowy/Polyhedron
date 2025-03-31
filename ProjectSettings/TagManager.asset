@@ -15,6 +15,12 @@ TagManager:
   - Lightning
   - Ball
   - Enemy Shield
+  - Shield Option
+  - Ball Option
+  - Lightning Option
+  - Ice Option
+  - Fire Option
+  - Hypnosis Option
   layers:
   - Default
   - TransparentFX

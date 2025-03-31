@@ -113,6 +113,7 @@ public class Spell_Script : MonoBehaviour
     
     [Header("Extra")]
     public Transform player;
+    public Wave_Manager WM;
 
     private void Start()
     {
@@ -329,6 +330,8 @@ public class Spell_Script : MonoBehaviour
             maxFire = true;
             maxSpell = true;
             rerollLevel++;
+            
+            checkMaxSpell();
         }
     }
     
@@ -414,6 +417,8 @@ public class Spell_Script : MonoBehaviour
             maxIce = true;
             maxSpell = true;
             rerollLevel++;
+            
+            checkMaxSpell();
         }
     }
     
@@ -497,6 +502,8 @@ public class Spell_Script : MonoBehaviour
             maxLightning = true;
             maxSpell = true;
             rerollLevel++;
+            
+            checkMaxSpell();
         }
     }
     
@@ -688,6 +695,8 @@ public class Spell_Script : MonoBehaviour
             maxBall = true;
             maxSpell = true;
             rerollLevel++;
+            
+            checkMaxSpell();
         }
     }
     
@@ -784,6 +793,8 @@ public class Spell_Script : MonoBehaviour
             maxHypnosis = true;
             maxSpell = true;
             rerollLevel++;
+            
+            checkMaxSpell();
         }
     }
     
@@ -828,6 +839,8 @@ public class Spell_Script : MonoBehaviour
             maxShield = true;
             maxSpell = true;
             rerollLevel++;
+            
+            checkMaxSpell();
         }
     }
 
@@ -859,29 +872,39 @@ public class Spell_Script : MonoBehaviour
     
     ///////// Max Spell Checker ///////////
 
-    public bool getFireMax()
+    public void checkMaxSpell()
     {
-        return maxFire;
-    }
-    public bool getIceMax()
-    {
-        return maxIce;
-    }
-    public bool getLightningMax()
-    {
-        return maxLightning;
-    }
-    public bool getBallMax()
-    {
-        return maxBall;
-    }
-    public bool getHypnosisMax()
-    {
-        return maxHypnosis;
-    }
-    public bool getShieldMax()
-    {
-        return maxShield;
+        List<GameObject> spellList = WM.getList();
+        
+        for (int i = 0; i < spellList.Count; i++)
+        {
+            SpellOption_Script spellScript = spellList[i].GetComponent<SpellOption_Script>();
+            
+            if (spellList[i].tag == "Ball Option" && maxBall)
+            {
+                spellScript.setMax(true);
+            }
+            if (spellList[i].tag == "Lightning Option" && maxLightning)
+            {
+                spellScript.setMax(true);
+            }
+            if (spellList[i].tag == "Fire Option" && maxFire)
+            {
+                spellScript.setMax(true);
+            }
+            if (spellList[i].tag == "Ice Option" && maxIce)
+            {
+                spellScript.setMax(true);
+            }
+            if (spellList[i].tag == "Shield Option" && maxShield)
+            {
+                spellScript.setMax(true);
+            }
+            if (spellList[i].tag == "Hypnosis Option" && maxHypnosis)
+            {
+                spellScript.setMax(true);
+            }
+        }
     }
 
     //If any spells are maxed, this returns true

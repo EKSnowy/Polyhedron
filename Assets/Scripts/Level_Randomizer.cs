@@ -4,39 +4,58 @@ using UnityEngine;
 
 public class Level_Randomizer : MonoBehaviour
 {
-    public GameObject Layout1;
-    public GameObject Layout2;
-    public GameObject Layout3;
-    public GameObject Layout4;
-
-    public float random;
+    [Header("Levels")] 
+    public List<GameObject> levelList;
+    public List<GameObject> bossLevelList;
+    public int random;
+    
+    [Header("Background Colors")]
+    public Camera mainCam;
+    public List<Color> colorList;
+    public Color bossColor;
     void Start()
     {
-        Layout1.SetActive(false);
-        Layout2.SetActive(false);
-        Layout3.SetActive(false);
-        Layout4.SetActive(false);
-        
-        random = Random.Range(1, 5);
+        levelRandomize();
+    }
 
-        if (random == 1)
-        {
-            Layout1.SetActive(true);
-        }
+    public void levelRandomize()
+    {
+        levelsOff();
+        randomizeColor();
         
-        else if (random == 2)
-        {
-            Layout2.SetActive(true);
-        }
+        random = Random.Range(0, levelList.Count);
+
+        levelList[random].SetActive(true);
+    }
+
+    public void bossLevelRandomize()
+    {
+        levelsOff();
+        mainCam.backgroundColor = bossColor;
         
-        else if (random == 3)
+        random = Random.Range(0, bossLevelList.Count);
+
+        bossLevelList[random].SetActive(true);
+    }
+
+    public void levelsOff()
+    {
+        //Normal levels
+        foreach (GameObject level in levelList)
         {
-            Layout3.SetActive(true);
+            level.SetActive(false);
         }
-        
-        else if (random == 4)
+        //For boss levels
+        foreach (GameObject bossLevel in bossLevelList)
         {
-            Layout4.SetActive(true);
+            bossLevel.SetActive(false);
         }
+    }
+
+    public void randomizeColor()
+    {
+        random = Random.Range(0, colorList.Count);
+
+        mainCam.backgroundColor = colorList[random];
     }
 }

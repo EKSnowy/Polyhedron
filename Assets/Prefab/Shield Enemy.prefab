@@ -210,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 2668033313788533017}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.73, y: 2.372648, z: 0}
+  m_LocalPosition: {x: -6.73, y: 2.372648, z: -1}
   m_LocalScale: {x: 0.25, y: 0.25, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -367,6 +367,7 @@ MonoBehaviour:
   minHighHealth: 5
   maxLowHealth: 0
   minLowHealth: 0
+  healthModifier: 1.5
   HB: {fileID: 382677360861988284}
   Fire: {fileID: 413424842950537795}
   inLightning: 0
