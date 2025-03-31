@@ -26,6 +26,7 @@ public class Throw_Script : MonoBehaviour
    public float dashCooldown;
    public TextMeshPro dashText;
    public Image dashFill;
+   public bool soundCooldown;
 
    [Header("Scripts")]
    Trajectory_Script TS;
@@ -40,6 +41,7 @@ public class Throw_Script : MonoBehaviour
        
        AM = GameObject.FindWithTag("Audio Manager").GetComponent<Audio_Manager>();
        dashCooldown = -1;
+       soundCooldown = true;
    }
 
    void Update()
@@ -115,7 +117,7 @@ public class Throw_Script : MonoBehaviour
                 Music.volume = .35f;
                 Music.pitch = 1f;
                 
-                AM.playSound(3);
+                AM.playSound(3,1);
                 endPoint = cam.ScreenToWorldPoint(Input.mousePosition);
                 endPoint.z = 0;
 
@@ -136,11 +138,18 @@ public class Throw_Script : MonoBehaviour
             
             float roundedDashTime = (float)((Mathf.Round(dashCooldown * 10)) / 10.0);;
             dashText.text = "" + roundedDashTime;
+            soundCooldown = false;
         }
         else
         {
             dashFill.fillAmount = 0;
             dashText.text = "";
+
+            if (!soundCooldown)
+            {
+                AM.playSound(3,1.5f);
+                soundCooldown = true;
+            }
         }
     }
    //For throwing

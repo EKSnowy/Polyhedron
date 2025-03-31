@@ -75,7 +75,7 @@ public class Enemy_Spawner : MonoBehaviour
             
             //Upon spawn the spawner is destroyed and a particle and sound is placed
             Instantiate(particle, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
-            AM.playSound(2);
+            AM.playSound(2,1);
             
             Destroy(gameObject);
         }

@@ -31,7 +31,7 @@ public class Enemy_Shoot : MonoBehaviour
         else
         {
             Instantiate(bullet, transform.position, Quaternion.identity);
-            AM.playSound(0);
+            AM.playSound(0,1);
             bulletCooldown = Random.Range(1, 4);
             enemy.changeSprite(CircleEnemy);
         }

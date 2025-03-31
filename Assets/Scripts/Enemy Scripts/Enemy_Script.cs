@@ -143,7 +143,7 @@ public class Enemy_Script : MonoBehaviour
     }
     public void Death()
     {
-        AM.playSound(1);
+        AM.playSound(1,1);
         Instantiate(particle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
