@@ -461,19 +461,22 @@ MonoBehaviour:
   target: {fileID: 3374372700688330649, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
   speed: 0
   rotateSpeed: 0
+  rotateModifier: 0
   particle: {fileID: 522513667301474997, guid: 56bb2060ed8b3ff4d8abc8f74f996db3, type: 3}
   AM: {fileID: 0}
   health: 0
   maxHealth: 0
   maxHighHealth: 0
   minHighHealth: 0
-  maxLowHealth: 0
-  minLowHealth: 0
+  maxLowHealth: 4
+  minLowHealth: 2
+  healthModifier: 1.5
   HB: {fileID: 7680122543665326341}
   Fire: {fileID: 7266123429136247907}
   inLightning: 0
   isStunned: 0
   SR: {fileID: 0}
+  angle: 0
 --- !u!58 &4138736718106198832
 CircleCollider2D:
   m_ObjectHideFlags: 0

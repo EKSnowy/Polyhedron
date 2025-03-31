@@ -138,7 +138,7 @@ public class Wave_Manager : MonoBehaviour
     public void addWave()
     {
         waves++;
-        wavesText.text = "Wave: " + waves;
+        wavesText.text = "Wave:" + waves;
         
         enemyHazardScript.addHealth(1.5f);
         enemyCircleScript.addHealth(1.5f);

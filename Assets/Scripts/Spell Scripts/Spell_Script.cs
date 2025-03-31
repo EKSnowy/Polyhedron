@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class Spell_Script : MonoBehaviour
@@ -44,7 +45,7 @@ public class Spell_Script : MonoBehaviour
     public bool maxShield;
     //If any spells are max
     public bool maxSpell;
-    [Header("Spell Damage")]
+    [Header("Spell Damage (Not used)")]
     public float fireDamage;
     public float iceDamage;
     public float lightningDamage;
@@ -73,7 +74,14 @@ public class Spell_Script : MonoBehaviour
     public Shield_Script shieldScript2;
     public Shield_Script shieldScript3;
     public Shield_Script shieldScript4;
+
+    [Header("Spell Ability Images")] 
+    public Image fireFill;
+    public Image iceFill;
+    public Image hypnosisFill;
+    public Image ballFill;
     
+    [Header("Extra")]
     public Transform player;
 
     private void Start()
@@ -95,13 +103,17 @@ public class Spell_Script : MonoBehaviour
             if (fireTimer > 0)
             {
                 fireTimer -= Time.deltaTime;
+                fireFill.fillAmount -= 1 / maxFireTimer * Time.deltaTime;
             }
             //If cooldown is up
             else
             {
+                fireFill.fillAmount = 0;
+                
                 if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
                 {
                     Instantiate(Fireball, player.position, Quaternion.identity);
+                    fireFill.fillAmount = 1;
                     fireTimer = maxFireTimer;
                 }
             }

@@ -3,26 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Throw_Script : MonoBehaviour
 {
    // Drag and throw script: https://youtu.be/Tsha7rp58LI?si=_dUqNFkhLBhb24Tp //
+   
    public float throwPower;
    public Rigidbody2D RB;
-   
    public Camera cam;
+   
+   [Header("Vectors")]
    public Vector2 force;
    public Vector3 startPoint;
    public Vector3 endPoint;
 
-   Trajectory_Script TS;
-
+   [Header("Line Color Gradients")]
    public Gradient throwGradient;
    public Gradient dashGradient;
 
+   [Header("Dash")]
    public float dashCooldown;
    public TextMeshPro dashText;
+   public Image dashFill;
 
+   [Header("Scripts")]
+   Trajectory_Script TS;
    public Player_Script player;
    public Audio_Manager AM;
    public AudioSource Music;
@@ -33,6 +39,7 @@ public class Throw_Script : MonoBehaviour
        TS = GetComponent<Trajectory_Script>();
        
        AM = GameObject.FindWithTag("Audio Manager").GetComponent<Audio_Manager>();
+       dashCooldown = -1;
    }
 
    void Update()
@@ -121,11 +128,19 @@ public class Throw_Script : MonoBehaviour
         
         }
         
-        //Placeholder to show the cooldown
-        if (dashCooldown > 0)
+        ///////////Dash Cooldown///////////////
+        if (dashCooldown >= 0)
         {
             dashCooldown -= Time.deltaTime;
-            dashText.text = "Cooldown: " + dashCooldown;
+            dashFill.fillAmount -= (float) 1 / 3 * Time.deltaTime;
+            
+            float roundedDashTime = (float)((Mathf.Round(dashCooldown * 10)) / 10.0);;
+            dashText.text = "" + roundedDashTime;
+        }
+        else
+        {
+            dashFill.fillAmount = 0;
+            dashText.text = "";
         }
     }
    //For throwing
@@ -157,6 +172,7 @@ public class Throw_Script : MonoBehaviour
            RB.AddForce(force, ForceMode2D.Force);
            
            dashCooldown = 3;
+           dashFill.fillAmount = 1;
        }
    }
 }
