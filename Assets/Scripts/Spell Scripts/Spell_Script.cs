@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -14,8 +15,19 @@ public class Spell_Script : MonoBehaviour
     public float ballLevel;
     public float hypnosisLevel;
     public float shieldLevel;
-    [Header("Reroll Level")]
+    
+    [Header("Reroll/Ability Level")]
     public float rerollLevel;
+    public float abilityLevel;
+
+    [Header("Spell Level Texts")] 
+    public TextMeshProUGUI fireLevelText;
+    public TextMeshProUGUI iceLevelText;
+    public TextMeshProUGUI lightningLevelText;
+    public TextMeshProUGUI ballLevelText;
+    public TextMeshProUGUI hypnosisLevelText;
+    public TextMeshProUGUI shieldLevelText;
+    
     [Header("Spell Timers")]
     //Fire
     public float fireTimer;
@@ -75,11 +87,29 @@ public class Spell_Script : MonoBehaviour
     public Shield_Script shieldScript3;
     public Shield_Script shieldScript4;
 
-    [Header("Spell Ability Images")] 
+    [Header("Spell Ability Fills")] 
     public Image fireFill;
     public Image iceFill;
     public Image hypnosisFill;
     public Image ballFill;
+
+    [Header("Spell Ability Objects")] 
+    public GameObject fireUI;
+    public GameObject iceUI;
+    public GameObject hypnosisUI;
+    public GameObject ballUI;
+
+    [Header("Ability Texts")] 
+    public TextMeshPro fireText;
+    public TextMeshPro iceText;
+    public TextMeshPro hypnosisText;
+    public TextMeshPro ballText;
+    
+    [Header("Spell Ability Slots")] 
+    public Transform abilitySlot1;
+    public Transform abilitySlot2;
+    public Transform abilitySlot3;
+    public Transform abilitySlot4;
     
     [Header("Extra")]
     public Transform player;
@@ -93,6 +123,12 @@ public class Spell_Script : MonoBehaviour
         shieldScript2.disableSprite();
         shieldScript3.disableSprite();
         shieldScript4.disableSprite();
+        
+        //Disables Spell UI//
+        fireUI.SetActive(false);
+        iceUI.SetActive(false);
+        hypnosisUI.SetActive(false);
+        ballUI.SetActive(false);
     }
 
     void Update()
@@ -104,11 +140,15 @@ public class Spell_Script : MonoBehaviour
             {
                 fireTimer -= Time.deltaTime;
                 fireFill.fillAmount -= 1 / maxFireTimer * Time.deltaTime;
+                
+                float roundedCooldown = (float)((Mathf.Round(fireTimer * 10)) / 10.0);;
+                fireText.text = "" + roundedCooldown;
             }
             //If cooldown is up
             else
             {
                 fireFill.fillAmount = 0;
+                fireText.text = "";
                 
                 if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Keypad1))
                 {
@@ -125,13 +165,21 @@ public class Spell_Script : MonoBehaviour
             if (iceTimer > 0)
             {
                 iceTimer -= Time.deltaTime;
+                iceFill.fillAmount -= 1 / maxIceTimer * Time.deltaTime;
+                
+                float roundedCooldown = (float)((Mathf.Round(iceTimer * 10)) / 10.0);;
+                iceText.text = "" + roundedCooldown;
             }
             //If cooldown up
             else
             {
+                iceFill.fillAmount = 0;
+                iceText.text = "";
+                
                 if (Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.Keypad2))
                 {
                     iceScript.Shoot();
+                    iceFill.fillAmount = 1;
                     iceTimer = maxIceTimer;
                 }
             }
@@ -146,19 +194,28 @@ public class Spell_Script : MonoBehaviour
         //Ball Toggle//
         if (toggleBall)
         {
-            BouncyBall.SetActive(true);
+            //BouncyBall.SetActive(true);
             
             if (ballTimer > 0)
             {
                 ballTimer -= Time.deltaTime;
+                ballFill.fillAmount -= 1 / maxBallTimer * Time.deltaTime;
+                
+                float roundedCooldown = (float)((Mathf.Round(ballTimer * 10)) / 10.0);;
+                ballText.text = "" + roundedCooldown;
             }
             else
             {
+                ballFill.fillAmount = 0;
+                ballText.text = "";
+                
                 foreach (GameObject ball in BallList)
                 {
                     Bouncyball_Script script = ball.GetComponent<Bouncyball_Script>();
                     script.Fling();
                 }
+
+                ballFill.fillAmount = 1;
                 ballTimer = maxBallTimer;
             }
         }
@@ -169,13 +226,21 @@ public class Spell_Script : MonoBehaviour
             if (hypnosisTimer > 0)
             {
                 hypnosisTimer -= Time.deltaTime;
+                hypnosisFill.fillAmount -= 1 / maxHypnosisTimer * Time.deltaTime;
+                
+                float roundedCooldown = (float)((Mathf.Round(hypnosisTimer * 10)) / 10.0);;
+                hypnosisText.text = "" + roundedCooldown;
             }
             //If cooldown is up
             else
             {
+                hypnosisFill.fillAmount = 0;
+                hypnosisText.text = "";
+                
                 if (Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Keypad3))
                 {
                     Instantiate(Hypnosis, player.position, Quaternion.identity);
+                    hypnosisFill.fillAmount = 1;
                     hypnosisTimer = maxHypnosisTimer;
                 }
             }
@@ -185,9 +250,13 @@ public class Spell_Script : MonoBehaviour
     public void addFireLevel()
     {
         fireLevel++;
+        fireLevelText.text = fireLevel + "/10";
 
         if (fireLevel == 1)
         {
+            addAbility(fireUI);
+            fireUI.SetActive(true);
+            
             toggleFire = true;
             fireScript.setDamage(3);
             fireScript.setBurn(2,1);
@@ -267,9 +336,13 @@ public class Spell_Script : MonoBehaviour
     public void addIceLevel()
     {
         iceLevel++;
+        iceLevelText.text = iceLevel + "/10";
 
         if (iceLevel == 1)
         {
+            addAbility(iceUI);
+            iceUI.SetActive(true);
+            
             toggleIce = true;
             maxIceTimer = 3f;
             iceScript.setBulletAmount(1);
@@ -348,6 +421,7 @@ public class Spell_Script : MonoBehaviour
     public void addLightningLevel()
     {
         lightningLevel++;
+        lightningLevelText.text = lightningLevel + "/10";
 
         if (lightningLevel == 1)
         {
@@ -430,9 +504,12 @@ public class Spell_Script : MonoBehaviour
     public void addBallLevel()
     {
         ballLevel++;
+        ballLevelText.text = ballLevel + "/10";
 
         if (ballLevel == 1)
         {
+            addAbility(ballUI);
+            ballUI.SetActive(true);
             toggleBall = true;
             
             float randomX = Random.Range(-7.9f, 7.9f);
@@ -618,9 +695,12 @@ public class Spell_Script : MonoBehaviour
     public void addHypnosisLevel()
     {
         hypnosisLevel++;
+        hypnosisLevelText.text = hypnosisLevel + "/10";
 
         if (hypnosisLevel == 1)
         {
+            addAbility(hypnosisUI);
+            hypnosisUI.SetActive(true);
             toggleHypnosis = true;
             
             hypnosisScript.setDamage(0);
@@ -711,6 +791,7 @@ public class Spell_Script : MonoBehaviour
     public void addShieldLevel()
     {
         shieldLevel++;
+        shieldLevelText.text = shieldLevel + "/5";
 
         if (shieldLevel == 1)
         {
@@ -747,6 +828,32 @@ public class Spell_Script : MonoBehaviour
             maxShield = true;
             maxSpell = true;
             rerollLevel++;
+        }
+    }
+
+    //////////Spell Ability Check////////////
+    public void addAbility(GameObject UI)
+    {
+        abilityLevel++;
+
+        if (abilityLevel == 1)
+        {
+            UI.transform.position = abilitySlot1.position;
+        }
+        
+        else if (abilityLevel == 2)
+        {
+            UI.transform.position = abilitySlot2.position;
+        }
+        
+        else if (abilityLevel == 3)
+        {
+            UI.transform.position = abilitySlot3.position;
+        }
+        
+        else if (abilityLevel == 4)
+        {
+            UI.transform.position = abilitySlot4.position;
         }
     }
     

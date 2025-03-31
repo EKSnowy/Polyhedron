@@ -98,8 +98,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timer: 0
-  AM: {fileID: 0}
+  enemyChosen: 0
   Circle: {fileID: 7865299090514383324, guid: 7679ad1520190a74cbc94e3f65c796b3, type: 3}
   Hazard: {fileID: 8077338028788311637, guid: 386031d3db980b04ab3acb05235b7a00, type: 3}
   Shield: {fileID: 2668033313788533017, guid: 491dde674541ae64ba0ec20d21a69b7b, type: 3}
+  Enemy: {fileID: 0}
   particle: {fileID: 7121792734419786873, guid: aaf1b7a49e18a1d40ab05b27131a4cae, type: 3}
+  AM: {fileID: 0}
+  WM: {fileID: 0}
+  SR: {fileID: 1440754498186147520}
+  circleColor: {r: 1, g: 0.52156866, b: 0, a: 0.56078434}
+  squareColor: {r: 0, g: 0.65882355, b: 0.043137256, a: 0.56078434}
+  triangleColor: {r: 1, g: 0.84313726, b: 0, a: 0.56078434}

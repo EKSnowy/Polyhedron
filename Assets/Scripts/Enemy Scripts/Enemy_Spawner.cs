@@ -7,14 +7,29 @@ using Random = UnityEngine.Random;
 public class Enemy_Spawner : MonoBehaviour
 {
     //Allows for random enemies to spawn on top of the spawners created by the wave manager
+    [Header("Values")]
     public float timer;
-    public Audio_Manager AM;
-    public Wave_Manager WM;
-
+    public bool enemyChosen;
+    
+    [Header("Objects")]
     public GameObject Circle;
     public GameObject Hazard;
     public GameObject Shield;
+    public GameObject Enemy;
+    
+    [Header("Particle")]
     public ParticleSystem particle;
+    
+    [Header("Scripts")]
+    public Audio_Manager AM;
+    public Wave_Manager WM;
+
+    [Header("Colors")]
+    public SpriteRenderer SR;
+    public Color circleColor;
+    public Color squareColor;
+    public Color triangleColor;
+    
     private void Start()
     {
         //Time to spawn is slightly randomized for each spawner
@@ -26,25 +41,37 @@ public class Enemy_Spawner : MonoBehaviour
 
     void Update()
     {
-        timer -= Time.deltaTime;
-        
         //Selects one of the three enemy types to spawn in
-        if (timer < 0)
+        if (!enemyChosen)
         {
             int random = Random.Range(1, 4);
 
             if (random == 1)
             {
-                WM.addList(Instantiate(Circle, new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
+                Enemy = Circle;
+                SR.color = circleColor;
+
             }
             else if (random == 2)
             {
-                WM.addList(Instantiate(Hazard, new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
+                Enemy = Hazard;
+                SR.color = triangleColor;
             }
             else if (random == 3)
             {
-                WM.addList(Instantiate(Shield, new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
+                Enemy = Shield;
+                SR.color = squareColor;
             }
+
+            enemyChosen = true;
+        }
+        
+        //Spawn timer counts down and then spawns at 0//
+        timer -= Time.deltaTime;
+        
+        if (timer < 0)
+        {
+            WM.addList(Instantiate(Enemy, new Vector2(transform.position.x, transform.position.y), Quaternion.identity));
             
             //Upon spawn the spawner is destroyed and a particle and sound is placed
             Instantiate(particle, new Vector2(transform.position.x, transform.position.y), Quaternion.identity);
