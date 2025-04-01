@@ -11,7 +11,6 @@ public class Level_Randomizer : MonoBehaviour
     
     [Header("Background Colors")]
     public Camera mainCam;
-    public List<Color> colorList;
     public Color bossColor;
     void Start()
     {
@@ -54,8 +53,12 @@ public class Level_Randomizer : MonoBehaviour
 
     public void randomizeColor()
     {
-        random = Random.Range(0, colorList.Count);
+        // Got from https://discussions.unity.com/t/how-to-generate-a-random-color/198158/8 //
+        byte r = (byte)Random.Range(64, 125);
+        byte b = (byte)Random.Range(64, 125);
+        byte g = (byte)Random.Range(64, 125);
+        Color32 color = new Color32(r,b,g,255);
 
-        mainCam.backgroundColor = colorList[random];
+        mainCam.backgroundColor = color;
     }
 }

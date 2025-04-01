@@ -21,6 +21,7 @@ TagManager:
   - Ice Option
   - Fire Option
   - Hypnosis Option
+  - Boss
   layers:
   - Default
   - TransparentFX
