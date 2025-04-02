@@ -469,12 +469,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 3374372700688330649, guid: 438fcf4468d76e244ae10fff335947c2, type: 3}
   speed: 0
+  rotateSpeed: 0
+  rotateModifier: 0
   particle: {fileID: 7404063845013425770, guid: 6742a843a7f9cda48aa2c545b9ab2fda, type: 3}
   AM: {fileID: 0}
   health: 0
   maxHealth: 0
+  maxHighHealth: 0
+  minHighHealth: 0
+  maxLowHealth: 0
+  minLowHealth: 0
+  healthModifier: 0
   HB: {fileID: 399803285172655978}
   Fire: {fileID: 3021530936231967242}
+  inLightning: 0
+  isStunned: 0
+  SR: {fileID: 0}
+  angle: 0
 --- !u!1 &8724263735844301031
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +564,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 0}
   m_FillRect: {fileID: 5417111942347711056}
   m_HandleRect: {fileID: 0}

@@ -63,6 +63,20 @@ public class Fireball_Script : MonoBehaviour
             triangle.startBurn(burnTime, burnDamage);
             Death();
         }
+        else if (other.tag == "Boss")
+        {
+            Boss_Script boss = other.GetComponent<Boss_Script>();
+            boss.takeDamage(damage);
+            boss.startBurn(burnTime, burnDamage);
+            Death();
+        }
+        else if (other.tag == "Boss Shield")
+        {
+            Enemy_Shield shield = other.GetComponent<Enemy_Shield>();
+            shield.takeDamage(damage);
+            shield.startBurn(burnTime, burnDamage);
+            Death();
+        }
     }
 
     public void setDamage(float num)

@@ -40,6 +40,18 @@ public class Lightning_Script : MonoBehaviour
             Enemy_Script triangle = other.GetComponent<Enemy_Script>();
             triangle.startLightning(damageTime,damage);
         }
+        else if (other.tag == "Boss")
+        {
+            Boss_Script boss = other.GetComponent<Boss_Script>();
+            boss.startLightning(damageTime,damage);
+            boss.takeDamage(damage);
+        }
+        else if (other.tag == "Boss Shield")
+        {
+            Enemy_Shield shield = other.GetComponent<Enemy_Shield>();
+            shield.startLightning(damageTime,damage);
+            shield.takeDamage(damage);
+        }
     }
 
     public void OnTriggerExit2D(Collider2D other)
@@ -58,6 +70,16 @@ public class Lightning_Script : MonoBehaviour
         {
             Enemy_Script triangle = other.GetComponent<Enemy_Script>();
             triangle.stopLightning();
+        }
+        else if (other.tag == "Boss")
+        {
+            Boss_Script boss = other.GetComponent<Boss_Script>();
+            boss.stopLightning();
+        }
+        else if (other.tag == "Boss Shield")
+        {
+            Enemy_Shield shield = other.GetComponent<Enemy_Shield>();
+            shield.stopLightning();
         }
     }
 }

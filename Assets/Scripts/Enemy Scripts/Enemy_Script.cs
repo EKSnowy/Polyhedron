@@ -122,19 +122,18 @@ public class Enemy_Script : MonoBehaviour
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;       
                 transform.rotation = Quaternion.Euler(Vector3.forward * (angle + offset));
             }
-            else
+
+            if (gameObject.tag == "Square Enemy")
             {
-                /////////////////WORK IN PROGRESS///////////////
-                
                 //if a shield enemy, rotation lerps to the player
                 Vector2 targetPos = target.position;
                 Vector2 thisPos = transform.position;
                 targetPos.x = targetPos.x - thisPos.x;
                 targetPos.y = targetPos.y - thisPos.y;
 
-                rotateSpeed = .004f;
+                rotateSpeed = 2f;
                 float tangle = Mathf.Atan2(targetPos.y, targetPos.x) * Mathf.Rad2Deg + 90f;
-                angle = Mathf.Lerp(angle,tangle, rotateSpeed);
+                angle = Mathf.Lerp(angle,tangle, rotateSpeed * Time.deltaTime);
                 transform.rotation = Quaternion.Euler(0,0,angle);
                 //Debug.Log("angle" + angle);
                 //Debug.Log("tangle" + tangle);

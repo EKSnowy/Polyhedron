@@ -45,6 +45,16 @@ public class Bouncyball_Script : MonoBehaviour
             Enemy_Script triangle = other.GetComponent<Enemy_Script>();
             triangle.takeDamage(damage);
         }
+        else if (other.tag == "Boss")
+        {
+            Boss_Script boss = other.GetComponent<Boss_Script>();
+            boss.takeDamage(damage);
+        }
+        else if (other.tag == "Boss Shield")
+        {
+            Enemy_Shield shield = other.GetComponent<Enemy_Shield>();
+            shield.takeDamage(damage);
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D other)

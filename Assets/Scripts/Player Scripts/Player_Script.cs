@@ -73,6 +73,18 @@ public class Player_Script : MonoBehaviour
                 healthChecker();
             }
         }
+        
+        else if (other.gameObject.CompareTag("Boss Bullet"))
+        {
+            Boss_Projectile bossBullet = other.GetComponent<Boss_Projectile>();
+            
+            if (!isInv)
+            {
+                health--;
+                healthChecker();
+                bossBullet.Death();
+            }
+        }
     }
     
     public void addHealth(float num)

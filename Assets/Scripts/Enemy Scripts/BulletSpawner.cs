@@ -68,4 +68,9 @@ public class BulletSpawner : MonoBehaviour
             rotationSpeed = 10;
         }
     }
+
+    public void switchRotation()
+    {
+        rotationSpeed *= -1;
+    }
 }

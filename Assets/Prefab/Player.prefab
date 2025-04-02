@@ -356,7 +356,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4690024224170183137}
-  - component: {fileID: 873310076609335757}
   - component: {fileID: 8240924109751037185}
   - component: {fileID: 3916229503787897952}
   m_Layer: 0
@@ -389,20 +388,6 @@ Transform:
   - {fileID: 6672682516091547446}
   m_Father: {fileID: 3374372700688330649}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &873310076609335757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4685886815689826727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe148bfd64691dc45b687109687b3fe2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 100
-  rotationType: Shields
 --- !u!1818360608 &8240924109751037185
 PositionConstraint:
   m_ObjectHideFlags: 0
@@ -470,7 +455,7 @@ Transform:
   m_GameObject: {fileID: 4850883477918650867}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.1372, y: -1.8027, z: 0}
+  m_LocalPosition: {x: -0.25, y: -3.88, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -591,9 +576,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.01309216}
   serializedVersion: 2
-  m_Radius: 1.9890795
+  m_Radius: 1.8581659
 --- !u!120 &1344459810136197830
 LineRenderer:
   serializedVersion: 2
@@ -785,6 +770,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   dashCooldown: 0
   dashText: {fileID: 0}
+  dashFill: {fileID: 0}
+  soundCooldown: 0
   player: {fileID: 1597512205767585543}
   AM: {fileID: 0}
   Music: {fileID: 0}
@@ -832,6 +819,11 @@ MonoBehaviour:
   healthText: {fileID: 3410096204208525593}
   invTimer: 0
   isInv: 0
+  deathScreen: {fileID: 0}
+  isDead: 0
+  SR: {fileID: 1817165748440919234}
+  normal: {r: 1, g: 1, b: 1, a: 0.53333336}
+  transparent: {r: 1, g: 1, b: 1, a: 0.27058825}
 --- !u!1 &5854572723049476630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1348,8 +1340,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.87457013, y: -0.06856334}
-  m_SizeDelta: {x: 1.0722, y: 1.182}
+  m_AnchoredPosition: {x: 0.1, y: -0.026}
+  m_SizeDelta: {x: 2.253, y: 1.039}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5641357143359327837
 MeshRenderer:
@@ -1371,7 +1363,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  - {fileID: -1114248139122158832, guid: 775196822b15c124f89427a0a98915d6, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1415,8 +1407,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 5
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 775196822b15c124f89427a0a98915d6, type: 2}
+  m_sharedMaterial: {fileID: -1114248139122158832, guid: 775196822b15c124f89427a0a98915d6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1447,7 +1439,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0

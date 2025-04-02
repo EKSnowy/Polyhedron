@@ -34,14 +34,7 @@ public class Boss_Projectile : MonoBehaviour
         Instantiate(particle, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
-
-    public void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.tag == "Player")
-        {
-            Death();
-        }
-    }
+    
     
     private Vector2 Movement(float timer) {
         // Moves right according to the bullet's rotation

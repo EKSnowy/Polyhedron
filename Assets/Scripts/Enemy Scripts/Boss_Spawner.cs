@@ -42,7 +42,7 @@ public class Boss_Spawner : MonoBehaviour
         
         if (timer < 0)
         {
-            WM.addList(Instantiate(Boss, new Vector2(-.16f,1.48f), Quaternion.identity));
+            WM.addList(Instantiate(Boss, new Vector2(transform.position.x,transform.position.y), Quaternion.identity));
             
             //Upon spawn the spawner is destroyed and a particle and sound is placed
             screenShake.setShakeTime(.2f);

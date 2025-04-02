@@ -22,6 +22,8 @@ TagManager:
   - Fire Option
   - Hypnosis Option
   - Boss
+  - Boss Bullet
+  - Boss Shield
   layers:
   - Default
   - TransparentFX

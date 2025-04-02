@@ -47,6 +47,11 @@ public class Shield_Script : MonoBehaviour
         {
             takeDamage(1);
         }
+
+        if (other.tag == "Boss Bullet")
+        {
+            takeDamage(2);
+        }
         
         else if (other.tag == "Triangle Enemy")
         {

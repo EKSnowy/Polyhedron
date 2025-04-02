@@ -21,6 +21,7 @@ public class Wave_Manager : MonoBehaviour
     public float difficultyMod;
     public TextMeshPro wavesText;
     public GameObject spawner;
+    public GameObject bossSpawner;
     [Header("Shop")]
     public GameObject shopUI;
     public bool triggerShop;
@@ -112,13 +113,32 @@ public class Wave_Manager : MonoBehaviour
             }
         }
     }
-    ///Adds a wave to the counter and randomly spawns enemy spawners at slightly random intervals
+    ///randomly spawns enemy spawners at slightly random intervals
     IEnumerator Spawn()
     {
         canSpawn = false;
         canCheck = false;
         
         for (int i = 0; i < enemyCount; i++)
+        {
+            float randomX = Random.Range(-7.9f, 7.9f);
+            float randomY = Random.Range(-4f,4f);
+
+            Instantiate(spawner, new Vector2(randomX, randomY), Quaternion.identity);
+            spawnTime = Random.Range(1f,.5f);
+            
+            yield return new WaitForSeconds(spawnTime);
+        }
+
+        canCheck = true;
+    }
+    //Spawns in half the amount of enemies for the boss//
+    IEnumerator bossSpawn()
+    {
+        canSpawn = false;
+        canCheck = false;
+        
+        for (int i = 0; i < enemyCount/2; i++)
         {
             float randomX = Random.Range(-7.9f, 7.9f);
             float randomY = Random.Range(-4f,4f);
@@ -154,9 +174,10 @@ public class Wave_Manager : MonoBehaviour
             enemyCount += 2;
         }
         //If on boss stage, play boss music and set up boss level//
-        if (waves == 10)
+        if (waves == 15)
         {
             bossLevel = true;
+            Instantiate(bossSpawner, new Vector2(-.16f,1.48f), Quaternion.identity);
             randomizer.bossLevelRandomize();
             musicScript.playBossSong();
         }
@@ -317,17 +338,31 @@ public class Wave_Manager : MonoBehaviour
         SceneManager.LoadScene(sceneName);
     }
 
+    public void skip()
+    {
+        player.addHealth(1);
+        shopUI.SetActive(false);
+        canSpawn = true;
+        player.setInvTimer(0);
+        
+        addWave();
+    }
+
     /////////////////Endless & Boss////////////////////
     
     public void toggleEndless()
     {
+        bossLevel = false;
         isEndless = true;
         musicScript.randomizeSong();
         randomizer.levelRandomize();
         difficultyMod = 2f;
     }
-    
-    //public 
+
+    public void startSpawn()
+    {
+        StartCoroutine(bossSpawn());
+    }
     
     //////////Extra///////////
     
