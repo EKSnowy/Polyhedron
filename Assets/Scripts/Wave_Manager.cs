@@ -174,7 +174,7 @@ public class Wave_Manager : MonoBehaviour
             enemyCount += 2;
         }
         //If on boss stage, play boss music and set up boss level//
-        if (waves == 15)
+        if (waves % 15 == 0)
         {
             bossLevel = true;
             Instantiate(bossSpawner, new Vector2(-.16f,1.48f), Quaternion.identity);

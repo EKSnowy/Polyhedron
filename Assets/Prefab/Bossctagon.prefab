@@ -763,8 +763,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21006bef14d1e3a4ebcd1e67932909a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 100
+  maxHealth: 100
   inLightning: 0
   AM: {fileID: 0}
   HB: {fileID: 0}
@@ -944,8 +944,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21006bef14d1e3a4ebcd1e67932909a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 100
+  maxHealth: 100
   inLightning: 0
   AM: {fileID: 0}
   HB: {fileID: 0}
@@ -1559,8 +1559,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21006bef14d1e3a4ebcd1e67932909a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 100
+  maxHealth: 100
   inLightning: 0
   AM: {fileID: 0}
   HB: {fileID: 0}
@@ -1921,8 +1921,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21006bef14d1e3a4ebcd1e67932909a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 100
+  maxHealth: 100
   inLightning: 0
   AM: {fileID: 0}
   HB: {fileID: 0}
@@ -3970,8 +3970,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21006bef14d1e3a4ebcd1e67932909a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 100
+  maxHealth: 100
   inLightning: 0
   AM: {fileID: 0}
   HB: {fileID: 0}
@@ -4665,8 +4665,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 210c46b0f2665f943a3b7842ae09df39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  maxHealth: 100
+  health: 300
+  maxHealth: 300
   isImmune: 0
   inLightning: 0
   slowSpinTime: 0
@@ -4959,8 +4959,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21006bef14d1e3a4ebcd1e67932909a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 100
+  maxHealth: 100
   inLightning: 0
   AM: {fileID: 0}
   HB: {fileID: 0}
@@ -5517,8 +5517,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21006bef14d1e3a4ebcd1e67932909a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 100
+  maxHealth: 100
   inLightning: 0
   AM: {fileID: 0}
   HB: {fileID: 0}
@@ -5698,8 +5698,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21006bef14d1e3a4ebcd1e67932909a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 20
-  maxHealth: 20
+  health: 100
+  maxHealth: 100
   inLightning: 0
   AM: {fileID: 0}
   HB: {fileID: 0}

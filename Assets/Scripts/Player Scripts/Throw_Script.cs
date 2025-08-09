@@ -12,6 +12,7 @@ public class Throw_Script : MonoBehaviour
    public float throwPower;
    public Rigidbody2D RB;
    public Camera cam;
+   public GameObject dashProjection;
    
    [Header("Vectors")]
    public Vector2 force;
@@ -101,6 +102,7 @@ public class Throw_Script : MonoBehaviour
             
                 TS.changeColor(dashGradient);
                 TS.Render(true);
+                dashProjection.SetActive(true);
             }
 
             if (Input.GetMouseButton(1))
@@ -108,6 +110,8 @@ public class Throw_Script : MonoBehaviour
                 Vector3 currentPoint = cam.ScreenToWorldPoint(Input.mousePosition);
                 currentPoint.z = 0;
                 TS.RenderLine(gameObject.transform.position,currentPoint);
+
+                dashProjection.transform.position = currentPoint;
             }
             //Player teleports to end point as a dash, gains invincibility, and activates cooldown
             if (Input.GetMouseButtonUp(1))
@@ -125,6 +129,7 @@ public class Throw_Script : MonoBehaviour
                 transform.position = endPoint;
                 calculateDash();
                 TS.Render(false);
+                dashProjection.SetActive(false);
             }
         }
         
